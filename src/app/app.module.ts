@@ -16,8 +16,11 @@ import { MenuPrincipalComponent } from './components/shared/menu-principal/menu-
 import { MenuClienteComponent } from './components/shared/menu-cliente/menu-cliente.component';
 
 //paginas
-import { ConsultaContribuyenteComponent, HomeComponent } from './components/main/index';
-// import { HomeComponent } from './components/home/home.component';
+import {  ConsultaContribuyenteComponent,
+          HomeComponent,
+          SeleccionarClienteComponent
+        } from './components/main/index';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { ConsultaContribuyenteComponent, HomeComponent } from './components/main
     NavbarComponent,
     MenuPrincipalComponent,
     HomeComponent,
-    MenuClienteComponent
+    MenuClienteComponent,
+    SeleccionarClienteComponent
   ],
   imports: [
     BrowserModule,
