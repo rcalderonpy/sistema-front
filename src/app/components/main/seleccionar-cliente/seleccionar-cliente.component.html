@@ -1,0 +1,94 @@
+<!-- Content Header (Page header) -->
+<section class="content-header animated fadeIn">
+  <h1>
+    Seleccionar Cliente
+  </h1>
+</section>
+
+<section class="content animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">Filtro de Búsqueda</h3>
+          </div>
+
+          <div class="col-md-12 box-body bg-gray-light">
+
+              <div class="form-row">
+                <div class="col-md-2 mb-3">
+                  <label>RUC</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="RUC" >
+                </div>
+                <div class="col-md-5 mb-3">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="Nombre del Cliente">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <label>Cliente?</label>
+                  <select class="form-control form-control-sm">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+                <div class="col-md-1 mb-3">
+                  <label>Vto</label>
+                  <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label>Frecuencia</label>
+                  <select class="form-control form-control-sm">
+                    <option value="0">Mensual</option>
+                    <option value="1">Semestral</option>
+                    <option value="1">Anual</option>
+                  </select>
+                </div>
+                <div class="col-md-1 mb-3 media">
+                  <label></label>
+                  <button class="btn btn-outline-success btn-sm d-flex align-self-end mr-3" type="submit"><i class="ion-ios-search-strong"></i></button>
+                </div>
+              </div>
+
+
+          </div>
+
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped" *ngIf="clientes.length > 0">
+              <thead>
+              <tr>
+                <th>Ord</th>
+                <th>Vto</th>
+                <th>RUC</th>
+                <th>Cliente</th>
+                <th><i class="fa fa-check-square-o" aria-hidden="true"></i></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let cliente of clientes; index as idx">
+                <td>{{idx}}</td>
+                <td>13</td>
+                <td>4027083-1</td>
+                <td>Diego José Báez Cristaldo</td>
+                <td><input type="checkbox" value=""></td>
+              </tr>
+
+
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Engine version</th>
+                <th>CSS grade</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+    </div>
+  </div>
+</section>
