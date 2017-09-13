@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import {ConsultaContribuyenteComponent} from './components/consulta-contribuyente/consulta-contribuyente.component';
-import {HomeComponent} from './components/home/home.component';
+import { ConsultaContribuyenteComponent, HomeComponent } from './components/main/index';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },

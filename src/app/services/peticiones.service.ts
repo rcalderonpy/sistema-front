@@ -1,17 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {ActivatedRoute} from '@angular/router';
+
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class PeticionesService {
+export class PeticionesService implements OnInit{
 
   urlContribuyente:string="https://servicios.set.gov.py/EsetApiWSClient/contribuyente";
+  rutaActual:string = "";
 
-  constructor(private http:Http) { }
+  constructor(private http:Http, private route:ActivatedRoute) {
+  }
 
-
+  ngOnInit(){
+    this.esHome();
+  }
 
   getContribuyente(rucont:any, dvcont:number){
     let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -80,5 +86,11 @@ export class PeticionesService {
 
   }
 
+  esHome(){
+    this.route.url
+    .subscribe( parametros=>{
+      console.log(parametros[0].path);
+    });
+  }
 
 }

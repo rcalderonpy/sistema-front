@@ -6,14 +6,18 @@ import { HttpModule } from '@angular/http';
 //servicios
 import {PeticionesService} from './services/peticiones.service';
 
+//Rutas
 import {APP_ROUTING} from './app-router';
 
+// componentes comunes
 import { AppComponent } from './app.component';
-import { ConsultaContribuyenteComponent } from './components/consulta-contribuyente/consulta-contribuyente.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { MenuPrincipalComponent } from './components/menu-principal/menu-principal.component';
-import { HomeComponent } from './components/home/home.component';
-import { MenuClienteComponent } from './components/cliente/menu-cliente/menu-cliente.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { MenuPrincipalComponent } from './components/shared/menu-principal/menu-principal.component';
+import { MenuClienteComponent } from './components/shared/menu-cliente/menu-cliente.component';
+
+//paginas
+import { ConsultaContribuyenteComponent, HomeComponent } from './components/main/index';
+// import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
