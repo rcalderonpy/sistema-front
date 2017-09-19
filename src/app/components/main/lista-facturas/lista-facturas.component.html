@@ -1,0 +1,127 @@
+<div class="animated fadeIn">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 class="inline">
+      Lista de Facturas Emitidas
+    </h1>
+    <button type="button" class="btn btn-outline-success pull-right btn-sm">Nueva Factura</button>
+
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Filtro de Búsqueda</h3>
+            </div>
+
+            <div class="col-md-12 box-body bg-gray-light">
+
+                <div class="form-row">
+                  <div class="col-md-2 mb-3">
+                    <label>RUC</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="RUC" >
+                  </div>
+                  <div class="col-md-5 mb-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nombre del Cliente">
+                  </div>
+                  <div class="col-md-1 mb-3">
+                    <label>Cliente?</label>
+                    <select class="form-control form-control-sm">
+                      <option value="1">Sí</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                  <div class="col-md-1 mb-3">
+                    <label>Vto</label>
+                    <input type="text" class="form-control form-control-sm">
+                  </div>
+                  <div class="col-md-2 mb-3">
+                    <label>Frecuencia</label>
+                    <select class="form-control form-control-sm">
+                      <option value="0">Mensual</option>
+                      <option value="1">Semestral</option>
+                      <option value="1">Anual</option>
+                    </select>
+                  </div>
+                  <div class="col-md-1 mb-3 media">
+                    <label></label>
+                    <button class="btn btn-outline-success btn-sm d-flex align-self-end mr-3" type="submit"><i class="ion-ios-search-strong"></i></button>
+                  </div>
+                </div>
+
+
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped table-sm">
+                <thead>
+                <tr>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Comprobante</th>
+                  <th class="text-center">RUC</th>
+                  <th class="text-center">Cliente</th>
+                  <th class="text-center"><i class="fa fa-check-square-o" aria-hidden="true"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>15/09/2017</td>
+                    <td>001-001-0045489</td>
+                    <td>4027083-1</td>
+                    <td>Diego José Báez Cristaldo</td>
+                    <td class="text-center"><input type="checkbox" value=""></td>
+                  </tr>
+                  <tr>
+                    <td>15/09/2017</td>
+                    <td>001-001-0045489</td>
+                    <td>4027083-1</td>
+                    <td>Diego José Báez Cristaldo</td>
+                    <td class="text-center"><input type="checkbox" value=""></td>
+                  </tr>
+                  <tr>
+                    <td>15/09/2017</td>
+                    <td>001-001-0045489</td>
+                    <td>4027083-1</td>
+                    <td>Diego José Báez Cristaldo</td>
+                    <td class="text-center"><input type="checkbox" value=""></td>
+                  </tr>
+                  <tr>
+                    <td>15/09/2017</td>
+                    <td>001-001-0045489</td>
+                    <td>4027083-1</td>
+                    <td>Diego José Báez Cristaldo</td>
+                    <td class="text-center"><input type="checkbox" value=""></td>
+                  </tr>
+
+
+                </tbody>
+
+              </table>
+
+              <div class="row top-20">
+                <div class="col-md-12">
+                  <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                              <li class="page-item"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item"><a class="page-link" href="#">2</a></li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                          </nav>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>

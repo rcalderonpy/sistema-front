@@ -1,5 +1,6 @@
 import { Component, AfterContentInit } from '@angular/core';
 import {Router, ActivatedRoute } from '@angular/router';
+import { jqxNavigationBarComponent } from '../../../../../node_modules/jqwidgets-framework/jqwidgets-ts/angular_jqxnavigationbar';
 
 @Component({
   selector: 'app-menu-principal',
@@ -8,6 +9,8 @@ import {Router, ActivatedRoute } from '@angular/router';
 })
 export class MenuPrincipalComponent implements AfterContentInit {
   public isHome=false;
+  width: number = 100;
+  height: number = 460;
   constructor(private route:ActivatedRoute) {
 
   }

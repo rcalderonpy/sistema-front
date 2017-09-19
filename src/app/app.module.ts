@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framework/jqwidgets-ts/angular_jqxnavigationbar';
+
 
 //servicios
 import {PeticionesService} from './services/peticiones.service';
@@ -18,7 +20,8 @@ import { MenuClienteComponent } from './components/shared/menu-cliente/menu-clie
 //paginas
 import {  ConsultaContribuyenteComponent,
           HomeComponent,
-          SeleccionarClienteComponent
+          SeleccionarClienteComponent,
+          ListaFacturasComponent
         } from './components/main/index';
 
 
@@ -30,7 +33,9 @@ import {  ConsultaContribuyenteComponent,
     MenuPrincipalComponent,
     HomeComponent,
     MenuClienteComponent,
-    SeleccionarClienteComponent
+    jqxNavigationBarComponent,
+    SeleccionarClienteComponent,
+    ListaFacturasComponent
   ],
   imports: [
     BrowserModule,
