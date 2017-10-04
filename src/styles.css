@@ -27,3 +27,7 @@
 .fadeIn {
   animation-name: fadeIn;
 }
+
+.no-padding{
+  padding-left: 0;
+}

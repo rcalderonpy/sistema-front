@@ -7,6 +7,8 @@ import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framewor
 
 //servicios
 import {PeticionesService} from './services/peticiones.service';
+import {UserService} from './services/user.service';
+import {GLOBAL} from './services/global';
 
 //Rutas
 import {APP_ROUTING} from './app-router';
@@ -21,9 +23,9 @@ import { MenuClienteComponent } from './components/shared/menu-cliente/menu-clie
 import {  ConsultaContribuyenteComponent,
           HomeComponent,
           SeleccionarClienteComponent,
-          ListaFacturasComponent
+          ListaFacturasComponent,
+          LoginComponent
         } from './components/main/index';
-
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {  ConsultaContribuyenteComponent,
     MenuClienteComponent,
     jqxNavigationBarComponent,
     SeleccionarClienteComponent,
-    ListaFacturasComponent
+    ListaFacturasComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,10 @@ import {  ConsultaContribuyenteComponent,
     HttpModule,
     APP_ROUTING
   ],
-  providers: [PeticionesService],
+  providers: [
+    PeticionesService,
+    UserService
+          ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

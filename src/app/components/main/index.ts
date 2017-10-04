@@ -2,3 +2,4 @@ export { ConsultaContribuyenteComponent } from './consulta-contribuyente/consult
 export { HomeComponent } from './home/home.component';
 export { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
 export { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+export { LoginComponent } from './login/login.component';
