@@ -9,6 +9,8 @@ import {UserService} from '../../../services/user.service';
 export class LoginComponent implements OnInit {
   public title: string;
   public user: any;
+  public identity:any;
+  public token:string;
 
   constructor(
     private _route:ActivatedRoute,
@@ -19,17 +21,74 @@ export class LoginComponent implements OnInit {
       this.user = {
         'email':'',
         'password':'',
-        'getHash':'false'
+        'getHash':'true'
       };
   }
 
   ngOnInit() {
     console.log("El componente login.component ha sido cargado!!")
+    this.logout();
+
+  }
+
+  logout(){
+    this._route.params.forEach((params:Params)=>{
+      let logout = +params['id'];
+      if(logout == 1){
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+
+        this.identity = null;
+        this.token = null;
+
+        window.location.href = '/login';
+      }
+    })
   }
 
   onSubmit(){
     console.log(this.user);
-    alert(this._userService.signup());
+
+    this._userService.signup(this.user)
+        .subscribe(
+          response => {
+            this.identity = response;
+            if(this.identity.length <=1){
+              console.log('Error en el servidor');
+            }{
+              if(!this.identity.status){
+                localStorage.setItem('identity', JSON.stringify(this.identity));
+
+                // GET token
+                this.user.getHash = null;
+                this._userService.signup(this.user)
+                    .subscribe(
+                      response => {
+                        this.token = response;
+                        if(this.identity.length <=1){
+                          console.log('Error en el servidor');
+                        }{
+                          if(!this.identity.status){
+                            localStorage.setItem('token', JSON.stringify(this.token));
+
+                            // redirecciona al home
+                            window.location.href = '/';
+                          }
+                        }
+
+                      },
+                      error => {
+                        console.log(<any>error);
+                      }
+                    );
+              }
+            }
+
+          },
+          error => {
+            console.log(<any>error);
+          }
+        );
 
   }
 
