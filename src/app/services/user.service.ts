@@ -35,6 +35,7 @@ export class UserService {
     }
     return this.identity;
   }
+
   getToken(){
     let token = JSON.parse(localStorage.getItem('token'));
     if(token!= 'undefined'){
@@ -45,4 +46,38 @@ export class UserService {
     return this.token;
   }
 
+  listaUsuarios(user_to_login){
+    let params = "authorization="+this.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/user/list',params, {headers:headers})
+              .map(res => res.json());
+  }
+
+  nuevoUsuario(data){
+    let json = JSON.stringify(data);
+    let params = "json="+json+"&authorization="+this.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/user/new',params, {headers:headers})
+              .map(res => res.json());
+  }
+
+  editarUsuario(data){
+    let json = JSON.stringify(data);
+    let params = "json="+json+"&authorization="+this.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/user/edit',params, {headers:headers})
+              .map(res => res.json());
+  }
+
+  detalleUsuario(data){
+    let json = JSON.stringify(data);
+    let params = "json="+json+"&authorization="+this.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/user/detail',params, {headers:headers})
+              .map(res => res.json());
+  }
 }

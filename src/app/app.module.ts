@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framework/jqwidgets-ts/angular_jqxnavigationbar';
@@ -9,6 +9,9 @@ import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framewor
 import {PeticionesService} from './services/peticiones.service';
 import {UserService} from './services/user.service';
 import {GLOBAL} from './services/global';
+
+// pipes
+import {TsToDatePipe} from './pipes/tstodate.pipe';
 
 //Rutas
 import {APP_ROUTING} from './app-router';
@@ -26,6 +29,11 @@ import {  ConsultaContribuyenteComponent,
           ListaFacturasComponent,
           LoginComponent
         } from './components/main/index';
+import { UsuarioNuevoComponent,
+         UsuarioEditarComponent
+ } from './components/usuarios/index';
+import { UsuarioComponent } from './components/usuarios/usuario.component';
+import { UsuarioListaComponent } from './components/usuarios/usuario-lista/usuario-lista.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +46,12 @@ import {  ConsultaContribuyenteComponent,
     jqxNavigationBarComponent,
     SeleccionarClienteComponent,
     ListaFacturasComponent,
-    LoginComponent
+    LoginComponent,
+    UsuarioComponent,
+    UsuarioNuevoComponent,
+    UsuarioEditarComponent,
+    UsuarioListaComponent,
+    TsToDatePipe
   ],
   imports: [
     BrowserModule,
@@ -49,7 +62,8 @@ import {  ConsultaContribuyenteComponent,
   ],
   providers: [
     PeticionesService,
-    UserService
+    UserService,
+    {provide: LOCALE_ID, useValue: "es"}
           ],
   bootstrap: [AppComponent]
 })

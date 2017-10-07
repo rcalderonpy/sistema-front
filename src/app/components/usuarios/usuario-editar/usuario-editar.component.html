@@ -1,0 +1,131 @@
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Editar Usuario
+    </h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content animated fadeIn">
+
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col-md-8">
+        <!-- Formulario Carga Datos -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ingresar Datos</h3>
+
+
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <div class="row">
+              <div class="col-md-9 col-sm-8">
+                <div class="pad">
+
+                  <form (ngSubmit)="guardarUsuario()" #forma="ngForm" novalidate="">
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Nombre</label>
+                      <div class="col-8">
+
+                        <input class="form-control"
+                        type="text"
+                        name="nombre"
+                        [(ngModel)]="usuario.nombre"
+                        placeholder="nombre"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Apellido</label>
+                      <div class="col-8">
+
+                        <input class="form-control"
+                        type="text"
+                        name="apellido"
+                        [(ngModel)]="usuario.apellido"
+                        placeholder="apellido"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Email</label>
+                      <div class="col-8">
+
+                        <input class="form-control"
+                        type="email"
+                        name="email"
+                        [(ngModel)]="usuario.email"
+                        placeholder="email"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Repetir Email</label>
+                      <div class="col-8">
+
+                        <input class="form-control"
+                        type="email"
+                        name="email2"
+                        placeholder="confirmar email"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">&nbsp;</label>
+                      <div class="input-group col-md-4">
+                        <button [disabled]="!forma.valid"
+                        type="submit"
+                        class="btn btn-outline-primary">
+                          <i class="fa fa-save" aria-hidden="true"></i>
+                          Guardar
+                        </button>
+                      </div>
+
+                      <div class="input-group col-md-4">
+                        <button
+                        type="button"
+                        [routerLink]="['../']"
+                        class="btn btn-outline-success pull-right">
+                          <i class="fa fa-save" aria-hidden="true"></i>
+                          Volver
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4">
+
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  </section>
+</div>

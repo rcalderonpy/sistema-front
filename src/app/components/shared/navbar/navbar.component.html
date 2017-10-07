@@ -12,9 +12,9 @@
     <ul class="navbar-nav mr-auto">
 
     </ul>
-    <span class="navbar-text">
-      <span>Bienvenido Usuario</span> |
-      <a [routerLink]="['/login',1]">Salir</a>
+    <span class="navbar-text"  *ngIf="identity">
+      <span><a [routerLink]="['/']">Bienvenido <strong>{{identity.nombre}} {{identity.apellido}}</strong></a> |</span>
+      <a [routerLink]="['/login',1]">Salir <i class="fa fa-sign-out" aria-hidden="true"></i></a>
     </span>
   </div>
 
