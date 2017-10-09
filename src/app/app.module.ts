@@ -8,6 +8,7 @@ import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framewor
 //servicios
 import {PeticionesService} from './services/peticiones.service';
 import {UserService} from './services/user.service';
+import {ClienteService} from './services/cliente.service';
 import {GLOBAL} from './services/global';
 
 // pipes
@@ -29,11 +30,19 @@ import {  ConsultaContribuyenteComponent,
           ListaFacturasComponent,
           LoginComponent
         } from './components/main/index';
-import { UsuarioNuevoComponent,
-         UsuarioEditarComponent
- } from './components/usuarios/index';
+// Usuarios
 import { UsuarioComponent } from './components/usuarios/usuario.component';
-import { UsuarioListaComponent } from './components/usuarios/usuario-lista/usuario-lista.component';
+import { UsuarioListaComponent,
+         UsuarioNuevoComponent,
+         UsuarioEditarComponent
+        } from './components/usuarios/index';
+
+// Clientes
+import { ClienteComponent } from './components/cliente/cliente.component';
+import {  ClienteListaComponent,
+          ClienteNuevoComponent
+        } from './components/cliente/cliente.index';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +60,10 @@ import { UsuarioListaComponent } from './components/usuarios/usuario-lista/usuar
     UsuarioNuevoComponent,
     UsuarioEditarComponent,
     UsuarioListaComponent,
-    TsToDatePipe
+    TsToDatePipe,
+    ClienteComponent,
+    ClienteListaComponent,
+    ClienteNuevoComponent
   ],
   imports: [
     BrowserModule,
@@ -63,8 +75,9 @@ import { UsuarioListaComponent } from './components/usuarios/usuario-lista/usuar
   providers: [
     PeticionesService,
     UserService,
+    ClienteService,
     {provide: LOCALE_ID, useValue: "es"}
-          ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

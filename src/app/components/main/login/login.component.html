@@ -5,7 +5,7 @@
     <div class="identity-alert alert alert-success" *ngIf="identity && identity.sub">
       Te has identificado correctamente! Bienvenido {{identity.email}}
     </div>
-    <div class="identity-alert alert alert-danger" *ngIf="identity && identity.data">
+    <div class="identity-alert alert alert-danger" *ngIf="identity && identity.status == 'error'">
       Identificación fallida!!
     </div>
     <form #loginForm="ngForm"

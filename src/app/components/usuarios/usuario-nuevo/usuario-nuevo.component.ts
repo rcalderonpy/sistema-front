@@ -28,11 +28,11 @@ export class UsuarioNuevoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.identity == null || !this.identity.sub){
-      this._router.navigate(['/login']);
-    } else {
-
-    }
+    // if(this.identity == null || !this.identity.sub){
+    //   this._router.navigate(['/login']);
+    // } else {
+    //
+    // }
   }
 
   guardarUsuario(){

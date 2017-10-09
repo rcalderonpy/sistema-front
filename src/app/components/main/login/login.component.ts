@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           response => {
             this.identity = response;
+            console.log(this.identity);
             if(this.identity.length <=1){
               console.log('Error en el servidor');
             }{
