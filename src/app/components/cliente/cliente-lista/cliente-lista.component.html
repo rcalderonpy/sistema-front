@@ -62,7 +62,7 @@
                     <td>{{cliente.nombres}} {{cliente.ape1}} {{cliente.ape2}} </td>
                     <td>{{cliente.estado}}</td>
                     <td class="text-center">
-                      <a><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a [routerLink]="['../editar',cliente.id]"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     </td>
                     <td class="text-center">
                       <i class="fa fa-trash" aria-hidden="true"></i>

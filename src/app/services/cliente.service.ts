@@ -33,4 +33,22 @@ export class ClienteService {
               .map(res => res.json());
   }
 
+  editarCliente(data_nueva){
+    let json = JSON.stringify(data_nueva);
+    let params = "json="+json+"&authorization="+this._userService.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/contabilidad/cliente/edit',params, {headers:headers})
+              .map(res => res.json());
+  }
+
+  getCliente(id_cliente){
+    let json = JSON.stringify({'id_cliente':id_cliente});
+    let params = "json="+json+"&authorization="+this._userService.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/contabilidad/cliente/detail',params, {headers:headers})
+              .map(res => res.json());
+  }
+
 }

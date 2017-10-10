@@ -1,0 +1,145 @@
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Editar Cliente {{cliente.nombres}} {{cliente.ape1}} {{cliente.ape2}}
+    </h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content animated fadeIn">
+
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col-md-8">
+        <!-- Formulario Carga Datos -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ingresar Datos</h3>
+
+
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <div class="row">
+              <div class="col-md-11 col-sm-8">
+                <div class="pad">
+
+                  <form (ngSubmit)="actualizarCliente()" #forma="ngForm" novalidate="">
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">RUC</label>
+                      <div class="col-6">
+                        <input class="form-control"
+                        type="text"
+                        name="ruc"
+                        [(ngModel)]="cliente.ruc"
+                        (blur)="getDV()"
+                        placeholder="RUC"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                      <label class="col-1 col-form-label">DV</label>
+                      <div class="col-2">
+                        <input class="form-control"
+                        type="text"
+                        name="dv"
+                        [(ngModel)]="cliente.dv"
+                        placeholder="DV"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Nombres</label>
+                      <div class="col-9">
+
+                        <input class="form-control"
+                        type="text"
+                        name="nombres"
+                        [(ngModel)]="cliente.nombres"
+                        placeholder="nombres o denominación social"
+                        required>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Apellido Paterno</label>
+                      <div class="col-9">
+
+                        <input class="form-control"
+                        type="text"
+                        name="ape1"
+                        [(ngModel)]="cliente.ape1"
+                        placeholder="apellido paterno"
+                        >
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Apellido Materno</label>
+                      <div class="col-9">
+
+                        <input class="form-control"
+                        type="text"
+                        name="ape2"
+                        [(ngModel)]="cliente.ape2"
+                        placeholder="apellido materno"
+                        >
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">&nbsp;</label>
+                      <div class="input-group col-md-4">
+                        <button [disabled]="!forma.valid"
+                        type="submit"
+                        class="btn btn-outline-primary">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        Guardar
+                      </button>
+                    </div>
+
+                    <div class="input-group col-md-4">
+                      <button
+                      type="button"
+                      [routerLink]="['../']"
+                      class="btn btn-outline-success pull-right">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        Volver
+                      </button>
+                    </div>
+                  </div>
+
+
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4">
+
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  </section>
+</div>

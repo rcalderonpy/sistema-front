@@ -40,7 +40,8 @@ import { UsuarioListaComponent,
 // Clientes
 import { ClienteComponent } from './components/cliente/cliente.component';
 import {  ClienteListaComponent,
-          ClienteNuevoComponent
+          ClienteNuevoComponent,
+          ClienteEditarComponent
         } from './components/cliente/cliente.index';
 
 
@@ -63,7 +64,8 @@ import {  ClienteListaComponent,
     TsToDatePipe,
     ClienteComponent,
     ClienteListaComponent,
-    ClienteNuevoComponent
+    ClienteNuevoComponent,
+    ClienteEditarComponent
   ],
   imports: [
     BrowserModule,
