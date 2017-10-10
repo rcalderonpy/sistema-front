@@ -51,4 +51,13 @@ export class ClienteService {
               .map(res => res.json());
   }
 
+  eliminarCliente(id_cliente){
+    let json = JSON.stringify({'id_cliente':id_cliente});
+    let params = "json="+json+"&authorization="+this._userService.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/contabilidad/cliente/delete',params, {headers:headers})
+              .map(res => res.json());
+  }
+
 }

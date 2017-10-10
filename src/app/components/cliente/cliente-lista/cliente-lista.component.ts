@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import {Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
 
 @Component({
@@ -13,9 +13,11 @@ export class ClienteListaComponent implements OnInit {
   public identity:any;
   public token:any;
   public clientes:any;
+  public loading:boolean=true;
+  public eliminado:boolean=false;
 
   constructor(
-          private route:ActivatedRoute,
+          private _route:ActivatedRoute,
           private _router:Router,
           private _userService:UserService,
           private _clienteService:ClienteService
@@ -28,13 +30,34 @@ export class ClienteListaComponent implements OnInit {
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
-      this._clienteService.listaClientes().subscribe(
-        res => {
-          this.clientes = res.clientes;
-          console.log(this.clientes);
-        }
-      )
+      this.conseguirClientes();
     }
+  }
+
+  conseguirClientes(){
+    this.loading=true;
+    this._clienteService.listaClientes().subscribe(
+      res => {
+        this.clientes = res.clientes;
+        console.log(this.clientes);
+        this.loading=false;
+      }
+    )
+  }
+
+  eliminarCliente(id){
+    this._clienteService.eliminarCliente(id).subscribe(
+      res => {
+        console.log(res);
+        this.eliminado=true;
+        this.loading=true;
+        this.conseguirClientes();
+        window.setTimeout(()=>{
+          this.eliminado=false;
+        },3000)
+
+      }
+    );
   }
 
 }

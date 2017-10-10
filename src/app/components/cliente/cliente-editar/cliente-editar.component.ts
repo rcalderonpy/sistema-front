@@ -18,7 +18,8 @@ export class ClienteEditarComponent implements OnInit {
     dv:'',
     nombres:'',
     ape1:'',
-    ape2:''
+    ape2:'',
+    estado:''
   };
 
   constructor(

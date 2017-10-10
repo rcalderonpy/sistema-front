@@ -97,6 +97,23 @@
                     </div>
 
                     <div class="form-group row">
+                      <label class="col-3 col-form-label">Estado</label>
+                      <div class="col-9">
+
+                        <select class="form-control"
+                                name="estado"
+                                [(ngModel)]="cliente.estado"
+                                >
+                          <option value="activo">ACTIVO</option>
+                          <option value="suspendido">SUSPENDIDO</option>
+                          <option value="cancelado">CANCELADO</option>
+
+                        </select>
+                        <!-- <div *ngIf="apellido.errors?.required">Este campo es requerido</div> -->
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
                       <label class="col-3 col-form-label">&nbsp;</label>
                       <div class="input-group col-md-4">
                         <button [disabled]="!forma.valid"
