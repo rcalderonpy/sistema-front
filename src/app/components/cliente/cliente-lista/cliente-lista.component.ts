@@ -10,9 +10,16 @@ import {ClienteService} from '../../../services/cliente.service';
 })
 export class ClienteListaComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   public identity:any;
   public token:any;
   public clientes:any;
+  public clientesf:any;
+  public filtros={
+    ruc:'',
+    nombre:''
+  }
   public loading:boolean=true;
   public eliminado:boolean=false;
 
@@ -27,6 +34,35 @@ export class ClienteListaComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 100,
+      lengthMenu:[2,20,100],
+      language:{
+        search:"Buscar datos",
+        paginate: {
+          first:      "<<",
+          last:       ">>",
+          next:       ">",
+          previous:   "<"
+        },
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        infoEmpty: "No hay registros que mostrar",
+        emptyTable: "No se encontraron registros",
+        zeroRecords: "No se encontraron registros",
+        infoFiltered:   "(filtrado de _MAX_ registros totales)",
+        lengthMenu:'Mostrar <select>'+
+          '<option value="2">2</option>'+
+          '<option value="50">50</option>'+
+          '<option value="100">100</option>'+
+          '<option value="500">500</option>'+
+          '<option value="-1">Todos</option>'+
+          '</select> registros'
+      }
+    };
+
+
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
@@ -39,6 +75,7 @@ export class ClienteListaComponent implements OnInit {
     this._clienteService.listaClientes().subscribe(
       res => {
         this.clientes = res.clientes;
+        this.clientesf = this.clientes;
         console.log(this.clientes);
         this.loading=false;
       }
@@ -58,6 +95,12 @@ export class ClienteListaComponent implements OnInit {
 
       }
     );
+  }
+
+  filtrarClientes(){
+    console.log(this.filtros);
+    this.clientesf=this._clienteService.filtrarClientes(this.clientes, this.filtros);
+    console.log(this.clientesf);
   }
 
 }

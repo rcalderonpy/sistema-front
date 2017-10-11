@@ -30,6 +30,7 @@ import {  ConsultaContribuyenteComponent,
           ListaFacturasComponent,
           LoginComponent
         } from './components/main/index';
+
 // Usuarios
 import { UsuarioComponent } from './components/usuarios/usuario.component';
 import { UsuarioListaComponent,
@@ -41,9 +42,12 @@ import { UsuarioListaComponent,
 import { ClienteComponent } from './components/cliente/cliente.component';
 import {  ClienteListaComponent,
           ClienteNuevoComponent,
-          ClienteEditarComponent
+          ClienteEditarComponent,
+          ClienteDetalleComponent
         } from './components/cliente/cliente.index';
 
+//Componentes especiales
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -65,14 +69,16 @@ import {  ClienteListaComponent,
     ClienteComponent,
     ClienteListaComponent,
     ClienteNuevoComponent,
-    ClienteEditarComponent
+    ClienteEditarComponent,
+    ClienteDetalleComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    APP_ROUTING
+    APP_ROUTING,
+    DataTablesModule
   ],
   providers: [
     PeticionesService,

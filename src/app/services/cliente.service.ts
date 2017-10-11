@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
 import {UserService} from './user.service';
@@ -58,6 +59,29 @@ export class ClienteService {
 
     return this._http.post(this.url+'/contabilidad/cliente/delete',params, {headers:headers})
               .map(res => res.json());
+  }
+
+  filtrarClientes(completo:any, filtro:any){
+    let filtro_clientes:any[]=[];
+    let filtroLow = filtro;
+    if(filtro.ruc!=''){
+      filtroLow.ruc = filtro.ruc.toLowerCase();
+    }
+    if(filtro.nombre!=''){
+      filtroLow.nombre = filtro.nombre.toLowerCase();
+    }
+
+    for (let cliente of completo ){
+        console.log(cliente);
+        let ruc = cliente.ruc.toLowerCase();
+        let nombre = (cliente.nombres+' '+cliente.ape1+' '+cliente.ape2).toLowerCase();
+
+        if(ruc.indexOf(filtroLow.ruc) >= 0 && nombre.indexOf(filtroLow.nombre) >= 0){
+          filtro_clientes.push(cliente);
+        }
+    }
+    
+    return filtro_clientes;
   }
 
 }

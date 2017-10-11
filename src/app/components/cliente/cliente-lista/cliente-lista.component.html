@@ -12,11 +12,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="box">
-            <div class="box-header with-border">
+            <!-- <div class="box-header with-border">
               <h3 class="box-title">Filtro de Búsqueda</h3>
-            </div>
+            </div> -->
 
-            <div class="col-md-12 box-body bg-gray-light">
+            <!-- <div class="col-md-12 box-body bg-gray-light">
 
                 <div class="form-row">
 
@@ -24,7 +24,12 @@
                     <label>RUC</label>
 
                     <div class="input-group">
-                      <input type="text" class="form-control form-control-sm" placeholder="RUC - DV">
+                      <input  type="text"
+                              class="form-control form-control-sm"
+                              placeholder="RUC"
+                              name="rucf"
+                              [(ngModel)]="filtros.ruc"
+                              (blur)="filtrarClientes()">
                       <span class="input-group-addon form-control-sm" id="basic-addon1"><i class="fa fa-filter" aria-hidden="true"></i></span>
                     </div>
 
@@ -33,7 +38,12 @@
                     <label>Nombre</label>
 
                     <div class="input-group">
-                      <input type="text" class="form-control form-control-sm" placeholder="Nombres o Apellidos">
+                      <input  type="text"
+                              class="form-control form-control-sm"
+                              placeholder="Nombres o Apellidos"
+                              name="nombresf"
+                              [(ngModel)]="filtros.nombre"
+                              (blur)="filtrarClientes()">
                       <span class="input-group-addon form-control-sm" id="basic-addon1"><i class="fa fa-filter" aria-hidden="true"></i></span>
                     </div>
                   </div>
@@ -42,7 +52,7 @@
                 </div>
 
 
-            </div>
+            </div> -->
 
             <!-- Alert Eliminado -->
             <div class="identity-alert alert alert-success" *ngIf="eliminado">
@@ -58,7 +68,11 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped table-sm" *ngIf="clientes && loading==false">
+              <table  datatable
+                      [dtOptions]="dtOptions"
+                      id="example1"
+                      class="table table-bordered table-striped table-sm"
+                      *ngIf="clientes && loading==false">
                 <thead>
                 <tr>
                   <th class="text-center">RUC</th>
@@ -69,8 +83,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cliente of clientes">
-                    <td>{{cliente.ruc}} - {{cliente.dv}}</td>
+                  <tr *ngFor="let cliente of clientesf">
+                    <td><a [routerLink]="['../detalle',cliente.id]">{{cliente.ruc}} - {{cliente.dv}}</a></td>
                     <td>{{cliente.nombres}} {{cliente.ape1}} {{cliente.ape2}} </td>
                     <td>{{cliente.estado}}</td>
                     <td class="text-center">
@@ -87,7 +101,7 @@
               </table>
 
 
-              <div class="row top-20">
+              <!-- <div class="row top-20">
                 <div class="col-md-12">
                   <nav aria-label="Page navigation example">
                             <ul class="pagination">
@@ -99,7 +113,7 @@
                             </ul>
                           </nav>
                 </div>
-              </div>
+              </div> -->
 
             </div>
             <!-- /.box-body -->
