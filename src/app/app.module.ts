@@ -10,6 +10,7 @@ import {PeticionesService} from './services/peticiones.service';
 import {UserService} from './services/user.service';
 import {FacturaService} from './services/factura.service';
 import {ClienteService} from './services/cliente.service';
+import {CalculosService} from './services/calculos.service';
 import {GLOBAL} from './services/global';
 
 // pipes
@@ -57,6 +58,9 @@ import {  FacturaListaComponent,
 
 //Componentes especiales
 import { DataTablesModule } from 'angular-datatables';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatInputModule, MatSelectModule} from '@angular/material';
+import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -92,13 +96,20 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     HttpModule,
     APP_ROUTING,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
+
   ],
   providers: [
     PeticionesService,
     UserService,
     ClienteService,
     FacturaService,
+    CalculosService,
     {provide: LOCALE_ID, useValue: "es"}
   ],
   bootstrap: [AppComponent]

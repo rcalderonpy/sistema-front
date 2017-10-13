@@ -31,3 +31,5 @@
 .no-padding{
   padding-left: 0;
 }
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

@@ -57,55 +57,78 @@
 
                     <div class="form-row">
 
-                      <div class="col-md-2 mb-2 px-1">
-                        <label class="mb-0">Fecha</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
+                      <div class="col-md-2 mb-2">
+                        <!-- <label class="mb-0">Fecha</label> -->
+                        <mat-form-field class="w-100">
+                          <input matInput
+                                [matDatepicker]="picker"
+                                class=""
                                 placeholder="Fecha"
                                 name="fecha"
                                 [(ngModel)]="factura.fecha"
+                                (blur)="mostrarFecha()"
                                 >
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
                       </div>
 
                       <div class="col-md-2 mb-2">
-                        <label class="mb-0">Timbrado</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="Timbrado"
-                                name="timbrado"
-                                [(ngModel)]="factura.timbrado"
-                                >
+                        <!-- <label class="mb-0">Timbrado</label> -->
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Timbrado"
+                              name="timbrado"
+                              [(ngModel)]="factura.timbrado"
+                            >
+                        </mat-form-field>
+
                       </div>
                       <div class="col-md-2 mb-2">
-                        <label class="mb-0">Condición</label>
-                        <select  type="text"
-                                class="form-control form-control-sm"
-                                name="condicion"
-                                [(ngModel)]="factura.condicion"
-                                >
-                          <option value="contado">Contado</option>
-                          <option value="plazo">Plazo</option>
-                        </select>
+                        <!-- <label class="mb-0">Condición</label> -->
+                        <mat-form-field class="w-100">
+                          <mat-select
+                            placeholder="Condición"
+                            name="condicion"
+                            [(ngModel)]="factura.condicion"
+                            >
+                            <mat-option *ngFor="let condicion of condiciones" [value]="condicion.value">
+                              {{ condicion.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
                       </div>
                       <div class="col-md-1 mb-2" *ngIf="factura.condicion=='plazo'">
-                        <label class="mb-0">Cuotas</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="Cuotas"
-                                name="cuotas"
-                                [(ngModel)]="factura.cuotas"
-                                >
+                        <!-- <label class="mb-0">Cuotas</label> -->
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="number"
+                              matInput
+                              class=""
+                              placeholder="Cuotas"
+                              name="cuotas"
+                              [(ngModel)]="factura.cuotas"
+                            >
+                        </mat-form-field>
+
                       </div>
                       <div class="col-md-2 mb-2">
-                        <label class="mb-0">Moneda</label>
-                        <select  type="text"
-                                class="form-control form-control-sm"
-                                name="moneda"
-                                [(ngModel)]="factura.moneda"
-                                >
-                          <option value="PYG">Guaraníes</option>
-                          <option value="USD">Dólares</option>
-                        </select>
+                        <mat-form-field class="w-100">
+                          <mat-select
+                            placeholder="Moneda"
+                            name="moneda"
+                            [(ngModel)]="factura.moneda"
+                            >
+                            <mat-option *ngFor="let moneda of monedas" [value]="moneda.value">
+                              {{ moneda.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
 
@@ -212,7 +235,7 @@
 
                 <button
                 type="button"
-                [routerLink]="['/cliente/editar',cliente.id]"
+                [routerLink]="['/cliente/editar',factura.id]"
                 class="btn btn-primary pull-right">
                   <i class="fa fa-save" aria-hidden="true"></i>
                   Guardar
