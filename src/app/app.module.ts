@@ -8,6 +8,7 @@ import { jqxNavigationBarComponent } from '../../node_modules/jqwidgets-framewor
 //servicios
 import {PeticionesService} from './services/peticiones.service';
 import {UserService} from './services/user.service';
+import {FacturaService} from './services/factura.service';
 import {ClienteService} from './services/cliente.service';
 import {GLOBAL} from './services/global';
 
@@ -46,6 +47,14 @@ import {  ClienteListaComponent,
           ClienteDetalleComponent
         } from './components/cliente/cliente.index';
 
+// Facturas
+import { FacturaComponent } from './components/factura/factura.component';
+import {  FacturaListaComponent,
+          FacturaNuevoComponent,
+          FacturaEditarComponent,
+          FacturaDetalleComponent
+        } from './components/factura/factura.index';
+
 //Componentes especiales
 import { DataTablesModule } from 'angular-datatables';
 
@@ -70,7 +79,12 @@ import { DataTablesModule } from 'angular-datatables';
     ClienteListaComponent,
     ClienteNuevoComponent,
     ClienteEditarComponent,
-    ClienteDetalleComponent
+    ClienteDetalleComponent,
+    FacturaComponent,
+    FacturaListaComponent,
+    FacturaNuevoComponent,
+    FacturaEditarComponent,
+    FacturaDetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +98,7 @@ import { DataTablesModule } from 'angular-datatables';
     PeticionesService,
     UserService,
     ClienteService,
+    FacturaService,
     {provide: LOCALE_ID, useValue: "es"}
   ],
   bootstrap: [AppComponent]

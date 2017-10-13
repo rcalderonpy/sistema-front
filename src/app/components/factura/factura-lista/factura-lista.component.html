@@ -1,0 +1,95 @@
+<div class="animated fadeIn">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 class="inline">
+      Lista de Facturas
+    </h1>
+    <button
+            type="button"
+            class="btn btn-outline-success pull-right btn-sm"
+            [routerLink]="['../nuevo']">Nueva Factura</button>
+
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+
+            <!-- Alert Eliminado -->
+            <div class="identity-alert alert alert-success" *ngIf="eliminado">
+              Factura eliminada exitosamente!!
+            </div>
+
+            <!-- loader -->
+            <div class="text-center" *ngIf="loading==true">
+              <img src="../../../assets/img/ripple.gif" alt="loader">
+
+            </div>
+
+<!-- class="table table-bordered table-striped table-sm" -->
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table
+
+                      class="table table-bordered compact"
+                      cellspacing="0"
+                      datatable
+                      [dtOptions]="dtOptions"
+                      id="example1"
+                      *ngIf="facturasf && loading==false"
+              >
+                <thead>
+                <tr>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Factura</th>
+                  <th class="text-center">Cliente</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">Editar</th>
+                  <th class="text-center">Borrar</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let factura of facturasf">
+                    <td>{{factura.fecha.timestamp | tsToDate | date:'dd/MM/y'}}</td>
+                    <td><a [routerLink]="['../detalle',factura.id]">{{factura.nsuc}}-{{factura.npe}}-{{factura.ncomp}}</a></td>
+                    <td>{{factura.cliente}}</td>
+                    <td>{{factura.total}}</td>
+                    <td class="text-center">
+                      <a [routerLink]="['../editar',factura.id]"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </td>
+                    <td class="text-center">
+                      <a (click)="eliminarCliente(factura.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+
+
+                </tbody>
+
+              </table>
+
+
+              <!-- <div class="row top-20">
+                <div class="col-md-12">
+                  <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                              <li class="page-item"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item"><a class="page-link" href="#">2</a></li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                          </nav>
+                </div>
+              </div> -->
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,243 @@
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <form (ngSubmit)="nuevaFactura()" #forma="ngForm" novalidate="">
+  <section class="content-header">
+    <h1>Nueva Factura</h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content animated fadeIn">
+
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col-md-12">
+        <!-- Formulario Carga Datos -->
+
+          <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ingresar Datos</h3>
+
+            <div class="col-md-4 mb-2 px-1 pull-right">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-4 mb-0 text-right">
+                  <span class="align-baseline">Nº Factura</span>
+                </div>
+                <div class="col-md-8 input-group">
+                  <input  type="text"
+                  class="form-control w-25 text-center"
+                  placeholder="Suc"
+                  name="nsuc"
+                  [(ngModel)]="factura.nsuc"
+                  >
+                  <input  type="text"
+                  class="form-control w-25 text-center"
+                  placeholder="PE"
+                  name="npe"
+                  [(ngModel)]="factura.npe"
+                  >
+                  <input  type="text"
+                  class="form-control w-50 text-center"
+                  placeholder="Factura"
+                  name="ncomp"
+                  [(ngModel)]="factura.ncomp"
+                  >
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-8">
+                <div class="pad">
+
+                    <div class="form-row">
+
+                      <div class="col-md-2 mb-2 px-1">
+                        <label class="mb-0">Fecha</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Fecha"
+                                name="fecha"
+                                [(ngModel)]="factura.fecha"
+                                >
+                      </div>
+
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">Timbrado</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Timbrado"
+                                name="timbrado"
+                                [(ngModel)]="factura.timbrado"
+                                >
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">Condición</label>
+                        <select  type="text"
+                                class="form-control form-control-sm"
+                                name="condicion"
+                                [(ngModel)]="factura.condicion"
+                                >
+                          <option value="contado">Contado</option>
+                          <option value="plazo">Plazo</option>
+                        </select>
+                      </div>
+                      <div class="col-md-1 mb-2" *ngIf="factura.condicion=='plazo'">
+                        <label class="mb-0">Cuotas</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Cuotas"
+                                name="cuotas"
+                                [(ngModel)]="factura.cuotas"
+                                >
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">Moneda</label>
+                        <select  type="text"
+                                class="form-control form-control-sm"
+                                name="moneda"
+                                [(ngModel)]="factura.moneda"
+                                >
+                          <option value="PYG">Guaraníes</option>
+                          <option value="USD">Dólares</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+
+                      <div class="col-md-2 mb-3">
+                        <label class="mb-0">RUC</label>
+                        <div class="input-group">
+                          <input  type="text"
+                          class="form-control w-75 text-center form-control-sm"
+                          placeholder="RUC"
+                          name="ruc"
+                          [(ngModel)]="factura.ruc"
+                          >
+                          <input  type="text"
+                          class="form-control w-25 text-center form-control-sm"
+                          placeholder="DV"
+                          name="dv"
+                          [(ngModel)]="factura.dv"
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-md-5 mb-3">
+                        <label class="mb-0">Cliente</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="nombre del cliente"
+                                name="cliente"
+                                [(ngModel)]="factura.cliente"
+                                >
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <label class="mb-0">Dirección</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="dirección"
+                                name="direccion"
+                                [(ngModel)]="factura.direccion"
+                                >
+                      </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                      <div class="col-md-2 mb-2 px-1">
+                        <label class="mb-0">Descuento</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="descuento"
+                                name="descuento"
+                                [(ngModel)]="factura.descuento"
+                                >
+                      </div>
+
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">Total Factura</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="total"
+                                name="total"
+                                [(ngModel)]="factura.total_factura"
+                                >
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">IVA 10%</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="iva 10%"
+                                name="iva10"
+                                [(ngModel)]="factura.iva10"
+                                >
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label class="mb-0">IVA 5%</label>
+                        <input  type="text"
+                                class="form-control form-control-sm"
+                                placeholder="iva 5%"
+                                name="iva5"
+                                [(ngModel)]="factura.iva5"
+                                >
+                      </div>
+
+                    </div>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- /.row -->
+            <hr>
+
+            <!-- Botones -->
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                type="button"
+                [routerLink]="['../']"
+                class="btn btn-success">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  Volver
+                </button>
+
+                <button
+                type="button"
+                [routerLink]="['/cliente/editar',cliente.id]"
+                class="btn btn-primary pull-right">
+                  <i class="fa fa-save" aria-hidden="true"></i>
+                  Guardar
+                </button>
+              </div>
+            </div>
+            <!-- / botones -->
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+
+
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4">
+
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  </section>
+</form>
+<!-- /Formulario -->
+</div>
