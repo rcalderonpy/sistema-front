@@ -87,6 +87,11 @@
                             >
                         </mat-form-field>
 
+                        <!-- <jqxBarGauge
+                        	 [width]="600" [height]="600" [colorScheme]="'scheme02'"
+                        	 [max]="150" [values]="values">
+                        </jqxBarGauge> -->
+
                       </div>
                       <div class="col-md-2 mb-2">
                         <!-- <label class="mb-0">Condición</label> -->
@@ -181,37 +186,10 @@
                                 class="form-control form-control-sm"
                                 placeholder="descuento"
                                 name="descuento"
-                                [(ngModel)]="factura.descuento"
+                                [(ngModel)]="factura.descuento"                                
                                 >
                       </div>
 
-                      <div class="col-md-2 mb-2">
-                        <label class="mb-0">Total Factura</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="total"
-                                name="total"
-                                [(ngModel)]="factura.total_factura"
-                                >
-                      </div>
-                      <div class="col-md-2 mb-2">
-                        <label class="mb-0">IVA 10%</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="iva 10%"
-                                name="iva10"
-                                [(ngModel)]="factura.iva10"
-                                >
-                      </div>
-                      <div class="col-md-2 mb-2">
-                        <label class="mb-0">IVA 5%</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="iva 5%"
-                                name="iva5"
-                                [(ngModel)]="factura.iva5"
-                                >
-                      </div>
 
                     </div>
 
@@ -227,16 +205,15 @@
               <div class="col-md-12">
                 <button
                 type="button"
-                [routerLink]="['../']"
+                [routerLink]="['/factura/lista']"
                 class="btn btn-success">
                   <i class="fa fa-reply" aria-hidden="true"></i>
                   Volver
                 </button>
 
-                <button
-                type="button"
-                [routerLink]="['/cliente/editar',factura.id]"
-                class="btn btn-primary pull-right">
+                <button [disabled]="!forma.valid"
+                  type="submit"
+                  class="btn btn-primary pull-right">
                   <i class="fa fa-save" aria-hidden="true"></i>
                   Guardar
                 </button>

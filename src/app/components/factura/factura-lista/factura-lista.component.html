@@ -55,7 +55,7 @@
                     <td>{{factura.fecha.timestamp | tsToDate | date:'dd/MM/y'}}</td>
                     <td><a [routerLink]="['../detalle',factura.id]">{{factura.nsuc}}-{{factura.npe}}-{{factura.ncomp}}</a></td>
                     <td>{{factura.cliente}}</td>
-                    <td>{{factura.total}}</td>
+                    <td>{{factura.iva10 | number}}</td>
                     <td class="text-center">
                       <a [routerLink]="['../editar',factura.id]"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     </td>

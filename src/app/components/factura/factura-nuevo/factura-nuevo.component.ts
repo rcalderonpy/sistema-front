@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute } from '@angular/router';
 import {FacturaService} from '../../../services/factura.service';
 import {PeticionesService} from '../../../services/peticiones.service';
 import {CalculosService} from '../../../services/calculos.service';
+import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
+import { MyCurrencyFormatterDirective } from "../../../directives/my-currency-formatter.directive";
 
 
 @Component({
   selector: 'app-factura-nuevo',
   templateUrl: './factura-nuevo.component.html'
+
 })
 export class FacturaNuevoComponent implements OnInit {
+  public values: number[] = [102, 115, 130, 137];
   public identity:any;
   public token:any;
+  public forma:any;
   public factura:any={
     nsuc:'001',
     npe:'001',
@@ -25,11 +31,11 @@ export class FacturaNuevoComponent implements OnInit {
     ruc:'0',
     dv:'0',
     cliente:'',
-    dirección:'',
+    direccion:'',
     descuento:'0',
-    total_factura:'0',
+    total_factura:'25000',
     iva10:'0',
-    iva5:'0'
+    iva5:18000
   };
   public condiciones = [
     {value: 'contado', viewValue: 'Contado'},
@@ -63,10 +69,16 @@ export class FacturaNuevoComponent implements OnInit {
   }
 
   nuevaFactura(){
+    // this.factura.iva5 = parseFloat(this.factura.iva5);
+    console.log(this.factura.iva5);
     this._facturaService.nuevaFactura(this.factura).subscribe(
       res => {
         console.log(res);
-        this._router.navigate(['/factura/lista']);
+        if(res.status=='success'){
+          this._router.navigate(['/factura/lista']);
+        } else {
+          alert(res.msg);
+        }
       }
     )
     // console.log(this.cliente);
@@ -81,6 +93,12 @@ export class FacturaNuevoComponent implements OnInit {
 
   mostrarFecha(){
     console.log(this.factura.fecha)
+  }
+
+  valores(formulario){
+    this.forma=formulario;
+    console.log(formulario);
+    // this.factura.iva5=
   }
 
 }

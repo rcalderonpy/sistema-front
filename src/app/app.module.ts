@@ -33,6 +33,9 @@ import {  ConsultaContribuyenteComponent,
           LoginComponent
         } from './components/main/index';
 
+//pipes
+
+
 // Usuarios
 import { UsuarioComponent } from './components/usuarios/usuario.component';
 import { UsuarioListaComponent,
@@ -61,6 +64,9 @@ import { DataTablesModule } from 'angular-datatables';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule, MatSelectModule} from '@angular/material';
 import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -88,7 +94,9 @@ import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
     FacturaListaComponent,
     FacturaNuevoComponent,
     FacturaEditarComponent,
-    FacturaDetalleComponent
+    FacturaDetalleComponent,
+    jqxBarGaugeComponent,
+    jqxNumberInputComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +109,8 @@ import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    CurrencyMaskModule
 
   ],
   providers: [
