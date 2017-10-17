@@ -140,40 +140,59 @@
                     <div class="form-row">
 
                       <div class="col-md-2 mb-3">
-                        <label class="mb-0">RUC</label>
-                        <div class="input-group">
-                          <input  type="text"
-                          class="form-control w-75 text-center form-control-sm"
-                          placeholder="RUC"
-                          name="ruc"
-                          [(ngModel)]="factura.ruc"
-                          >
-                          <input  type="text"
-                          class="form-control w-25 text-center form-control-sm"
-                          placeholder="DV"
-                          name="dv"
-                          [(ngModel)]="factura.dv"
-                          >
+                        <div class="form-row">
+                          <div class="col-md-8 pr-2">
+                            <mat-form-field class="w-100">
+                              <input  type="text"
+                                matInput
+                                class=""
+                                placeholder="RUC"
+                                name="ruc"
+                                [(ngModel)]="factura.ruc"
+                              >
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-md-4 pr-1">
+                            <mat-form-field class="w-100">
+                              <input  type="text"
+                                matInput
+                                class=""
+                                placeholder="DV"
+                                name="dv"
+                                [(ngModel)]="factura.dv"
+                              >
+                            </mat-form-field>
+                          </div>
                         </div>
+
+
+
                       </div>
 
                       <div class="col-md-5 mb-3">
-                        <label class="mb-0">Cliente</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="nombre del cliente"
-                                name="cliente"
-                                [(ngModel)]="factura.cliente"
-                                >
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Cliente"
+                              name="cliente"
+                              [(ngModel)]="factura.cliente"
+                            >
+                        </mat-form-field>
                       </div>
                       <div class="col-md-5 mb-3">
-                        <label class="mb-0">Dirección</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="dirección"
-                                name="direccion"
-                                [(ngModel)]="factura.direccion"
-                                >
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Dirección"
+                              name="direccion"
+                              [(ngModel)]="factura.direccion"
+                            >
+                        </mat-form-field>
                       </div>
 
                     </div>
@@ -182,12 +201,13 @@
 
                       <div class="col-md-2 mb-2 px-1">
                         <label class="mb-0">Descuento</label>
-                        <input  type="text"
-                                class="form-control form-control-sm"
-                                placeholder="descuento"
-                                name="descuento"
-                                [(ngModel)]="factura.descuento"                                
-                                >
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                        <input
+                        class="form-control form-control-sm numerico text-right"
+                        id="descuento"
+                        name="descuento"
+                        [(ngModel)]="factura.descuento"
+                        >
                       </div>
 
 

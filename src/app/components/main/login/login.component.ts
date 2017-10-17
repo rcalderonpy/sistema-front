@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   public user: any;
   public identity:any;
   public token:string;
+  public menu:string = 'login';
 
   constructor(
     private _route:ActivatedRoute,

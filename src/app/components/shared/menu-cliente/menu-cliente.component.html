@@ -1,3 +1,23 @@
-<p>
-  este es el menu cliente
-</p>
+<!-- sidebar menu: : style can be found in sidebar.less -->
+<ul class="sidebar-menu" data-widget="tree">
+  <li class="header">Menú Cliente</li>
+  <li class="treeview" routerLinkActive = "active">
+    <a [routerLink]="['/home']">
+      <i class="fa fa-pie-chart" aria-hidden="true"></i> <span>Tablero de Inicio</span>
+    </a>
+  </li>
+  <li class="treeview" routerLinkActive = "active menu-open">
+    <a [routerLink]="['/consulta-ruc']">
+      <i class="ion-search"></i> <span>Consultas</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+
+    <ul class="treeview-menu">
+      <li routerLinkActive = "active"><a [routerLink]="['/consulta-ruc']"><i class="fa fa-circle-o"></i> Datos Contribuyente</a></li>
+      <li routerLinkActive = "active"><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+    </ul>
+  </li>
+
+</ul>

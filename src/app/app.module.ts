@@ -66,7 +66,9 @@ import {MatInputModule, MatSelectModule} from '@angular/material';
 import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
-import { CurrencyMaskModule } from "ng2-currency-mask";
+// import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskModule } from "ngx-currency-mask";
+
 
 @NgModule({
   declarations: [

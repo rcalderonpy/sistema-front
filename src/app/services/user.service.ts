@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import "rxjs/add/operator/map";
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
 
 @Injectable()
-export class UserService {
+export class UserService{
 
   public url:string;
   public identity:any;
   public token:string;
+  public menu:string;
 
   constructor(
         private _http:Http
@@ -80,4 +81,5 @@ export class UserService {
     return this._http.post(this.url+'/user/detail',params, {headers:headers})
               .map(res => res.json());
   }
+
 }

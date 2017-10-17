@@ -13,21 +13,25 @@
   </header>
 
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
+  <aside class="main-sidebar" >
+
     <section class="sidebar">
-      <div>
-        <app-menu-principal></app-menu-principal>        
+      <div *ngIf="menu=='principal'">
+        <app-menu-principal></app-menu-principal>
+      </div>
+      <div *ngIf="menu!='principal'">
+        <app-menu-cliente></app-menu-cliente>
       </div>
 
     </section>
-    <!-- /.sidebar -->
+
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+    <router-outlet (pasameLosDatos)="verDatosService($event)"
+                    (activate)='onActivate($event)'></router-outlet>
     <!-- Content Header (Page header) -->
 
 

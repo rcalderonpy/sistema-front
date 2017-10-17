@@ -10,6 +10,7 @@ import {UserService} from '../../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   public identity:any;
+  public menu:string;
 
   constructor(
           private route:ActivatedRoute,
@@ -24,11 +25,12 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this._userService.menu='principal';
     console.log(this.identity);
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
-
+      this.menu='principal';
     }
   }
 

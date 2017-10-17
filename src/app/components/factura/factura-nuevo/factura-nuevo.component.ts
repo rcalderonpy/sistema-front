@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute } from '@angular/router';
 import {FacturaService} from '../../../services/factura.service';
@@ -6,15 +6,15 @@ import {PeticionesService} from '../../../services/peticiones.service';
 import {CalculosService} from '../../../services/calculos.service';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
-import { MyCurrencyFormatterDirective } from "../../../directives/my-currency-formatter.directive";
 
+declare var $:any;
 
 @Component({
   selector: 'app-factura-nuevo',
   templateUrl: './factura-nuevo.component.html'
 
 })
-export class FacturaNuevoComponent implements OnInit {
+export class FacturaNuevoComponent implements OnInit, OnChanges {
   public values: number[] = [102, 115, 130, 137];
   public identity:any;
   public token:any;
@@ -32,10 +32,10 @@ export class FacturaNuevoComponent implements OnInit {
     dv:'0',
     cliente:'',
     direccion:'',
-    descuento:'0',
-    total_factura:'25000',
-    iva10:'0',
-    iva5:18000
+    descuento:0,
+    total_factura:0,
+    iva10:0,
+    iva5:0
   };
   public condiciones = [
     {value: 'contado', viewValue: 'Contado'},
@@ -59,16 +59,22 @@ export class FacturaNuevoComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('.numerico').number( true, 2, ',', '.').focus(function(){
+      this.select();
+    });
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
-      // this.factura.fecha = this._calculoService.fechaTexto(new Date());
-      // this.mostrarFecha();
 
     }
   }
 
+  ngOnChanges(){
+  }
+
   nuevaFactura(){
+    // reemplaza los valores monetarios
+    this.factura.descuento=$('#descuento').val();
     // this.factura.iva5 = parseFloat(this.factura.iva5);
     console.log(this.factura.iva5);
     this._facturaService.nuevaFactura(this.factura).subscribe(
@@ -100,5 +106,18 @@ export class FacturaNuevoComponent implements OnInit {
     console.log(formulario);
     // this.factura.iva5=
   }
+
+  mostrarDescuento(){
+    console.log('se realiza mostrarDescuento');
+    console.log('factura-descuento',this.factura.descuento);
+    console.log('dom',$('#descuento').val());
+  }
+
+  // refrescar(){
+  //     $('.numerico').number( true, 2, ',', '.');
+  //     $('.numerico').focus(function(){
+  //       this.select();
+  //     });
+  // }
 
 }
