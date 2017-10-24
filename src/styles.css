@@ -33,3 +33,17 @@
 }
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+table th{
+  background-color: rgb(216, 225, 232);
+}
+
+table .subtotal{
+  background-color:#ccc;
+  font-weight: bold;
+}
+table .total{
+  background-color:rgb(83, 128, 204);
+  color: #fff;
+  font-weight: bold;
+}

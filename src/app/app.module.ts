@@ -62,7 +62,12 @@ import {  FacturaListaComponent,
 //Componentes especiales
 import { DataTablesModule } from 'angular-datatables';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatInputModule, MatSelectModule} from '@angular/material';
+import {
+        MatInputModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatTableModule
+} from '@angular/material';
 import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
@@ -112,6 +117,8 @@ import { CurrencyMaskModule } from "ngx-currency-mask";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatAutocompleteModule,
+    MatTableModule,
     CurrencyMaskModule
 
   ],

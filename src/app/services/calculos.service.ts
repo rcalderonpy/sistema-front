@@ -16,4 +16,10 @@ export class CalculosService {
 
     return nuevafecha;
   }
+
+  numeroPuntos(texto){
+    texto = texto.split('.').join('');
+    texto = texto.replace(',','.');
+    return texto;
+  }
 }

@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, DoCheck} from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute } from '@angular/router';
 import {FacturaService} from '../../../services/factura.service';
 import {PeticionesService} from '../../../services/peticiones.service';
 import {CalculosService} from '../../../services/calculos.service';
-import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 declare var $:any;
 
@@ -14,11 +18,11 @@ declare var $:any;
   templateUrl: './factura-nuevo.component.html'
 
 })
-export class FacturaNuevoComponent implements OnInit, OnChanges {
+export class FacturaNuevoComponent implements OnInit, DoCheck {
   public values: number[] = [102, 115, 130, 137];
   public identity:any;
   public token:any;
-  public forma:any;
+  public forma:FormGroup;
   public factura:any={
     nsuc:'001',
     npe:'001',
@@ -42,9 +46,26 @@ export class FacturaNuevoComponent implements OnInit, OnChanges {
     {value: 'plazo', viewValue: 'Plazo'}
   ];
   public monedas = [
-    {value: 'PYG', viewValue: 'Guaraníes'},
-    {value: 'USD', viewValue: 'Dólares'}
+    {value: 'PYG', viewValue: 'PYG'},
+    {value: 'USD', viewValue: 'USD'}
   ];
+
+  public detalle:any={
+    concepto: '',
+    recibo: 0,
+    exentas: 0,
+    gravadas5: 0,
+    gravadas10: 0
+  }
+
+  detalleFactura:any[]=[];
+
+  subtotales:any={
+    strecibo:0,
+    stexentas:0,
+    stgrav5:0,
+    stgrav10:0
+  }
 
   constructor(
           private route:ActivatedRoute,
@@ -56,12 +77,15 @@ export class FacturaNuevoComponent implements OnInit, OnChanges {
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+
   }
+
 
   ngOnInit() {
     $('.numerico').number( true, 2, ',', '.').focus(function(){
       this.select();
     });
+
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
@@ -69,7 +93,8 @@ export class FacturaNuevoComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(){
+  ngDoCheck(){
+    this.sumarDetalle();
   }
 
   nuevaFactura(){
@@ -97,27 +122,42 @@ export class FacturaNuevoComponent implements OnInit, OnChanges {
     }
   }
 
-  mostrarFecha(){
-    console.log(this.factura.fecha)
+  guardar(forma:any){
+    console.log(forma);
   }
 
-  valores(formulario){
-    this.forma=formulario;
-    console.log(formulario);
-    // this.factura.iva5=
+  sumarDetalle(){
+    this.subtotales.strecibo=0;
+    this.subtotales.stexentas=0;
+    this.subtotales.stgrav5=0;
+    this.subtotales.stgrav10=0;
+
+    for(let detalle in this.detalleFactura){
+      this.subtotales.strecibo = this.subtotales.strecibo + this.detalleFactura[detalle]['recibo'];
+      this.subtotales.stexentas = this.subtotales.stexentas + this.detalleFactura[detalle]['exentas'];
+      this.subtotales.stgrav5 = this.subtotales.stgrav5 + this.detalleFactura[detalle]['gravadas5'];
+      this.subtotales.stgrav10 = this.subtotales.stgrav10 + this.detalleFactura[detalle]['gravadas10'];
+    }
+    console.log(this.subtotales);
   }
 
-  mostrarDescuento(){
-    console.log('se realiza mostrarDescuento');
-    console.log('factura-descuento',this.factura.descuento);
-    console.log('dom',$('#descuento').val());
+  agregarLinea(concepto, recibo, exentas, gravadas5, gravadas10){
+    recibo = this._calculoService.numeroPuntos(recibo);
+    exentas = this._calculoService.numeroPuntos(exentas);
+    gravadas5 = this._calculoService.numeroPuntos(gravadas5);
+    gravadas10 = this._calculoService.numeroPuntos(gravadas10);
+
+    this.detalleFactura.push(
+      {
+        concepto: concepto,
+        recibo: parseFloat(recibo),
+        exentas: parseFloat(exentas),
+        gravadas5: parseFloat(gravadas5),
+        gravadas10: parseFloat(gravadas10)
+      }
+    );
+    console.log(gravadas10);
   }
 
-  // refrescar(){
-  //     $('.numerico').number( true, 2, ',', '.');
-  //     $('.numerico').focus(function(){
-  //       this.select();
-  //     });
-  // }
 
 }
