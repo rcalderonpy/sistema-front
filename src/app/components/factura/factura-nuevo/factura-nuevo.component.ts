@@ -94,14 +94,23 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(){
-    this.sumarDetalle();
+
   }
 
   nuevaFactura(){
-    // reemplaza los valores monetarios
-    this.factura.descuento=$('#descuento').val();
-    // this.factura.iva5 = parseFloat(this.factura.iva5);
-    console.log(this.factura.iva5);
+
+    // Actualiza el Total de la factura y los ivas
+    // console.log('subtotales', this.subtotales);
+
+    this.factura.total_factura=
+      parseFloat(this.subtotales.stexentas)+
+      parseFloat(this.subtotales.stgrav5)+
+      parseFloat(this.subtotales.stgrav10);
+    this.factura.iva5 = this._calculoService.sacarIva5(this.subtotales.stgrav5);
+    this.factura.iva10 = this._calculoService.sacarIva10(this.subtotales.stgrav10);
+    // console.log(this.factura);
+
+    // utiliza el servicio de guardar factura
     this._facturaService.nuevaFactura(this.factura).subscribe(
       res => {
         console.log(res);
@@ -112,7 +121,6 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
         }
       }
     )
-    // console.log(this.cliente);
   }
 
   getDV(){
@@ -157,6 +165,23 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
       }
     );
     console.log(gravadas10);
+    this.sumarDetalle();
+    this.detalle={
+      concepto: '',
+      recibo: 0,
+      exentas: 0,
+      gravadas5: 0,
+      gravadas10: 0
+    }
+    $('#concepto').focus();
+
+  }
+
+  borrarLinea(id){
+    console.log('objeto a borrar', id);
+    this.detalleFactura.splice(id,1);
+    this.sumarDetalle();
+    alert('Elemento eliminado');
   }
 
 

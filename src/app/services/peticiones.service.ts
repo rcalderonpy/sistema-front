@@ -16,7 +16,7 @@ export class PeticionesService implements OnInit{
   }
 
   ngOnInit(){
-    this.esHome();
+
   }
 
   getContribuyente(rucont:any, dvcont:number){
@@ -84,13 +84,6 @@ export class PeticionesService implements OnInit{
     console.log(digito);
     return digito;
 
-  }
-
-  esHome(){
-    this.route.url
-    .subscribe( parametros=>{
-      console.log(parametros[0].path);
-    });
   }
 
 }
