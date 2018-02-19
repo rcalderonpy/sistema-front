@@ -1,3 +1,415 @@
-<p>
-  factura-editar works!
-</p>
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <form (ngSubmit)="nuevaFactura()" #forma="ngForm" novalidate="">
+  <section class="content-header">
+    <h1>Nueva Factura</h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content animated fadeIn">
+
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col-md-12">
+        <!-- Formulario Carga Datos -->
+
+          <div class="box box-primary">
+          <!-- <div class="box-header with-border">
+
+
+            <div class="col-md-4 m-b-0 px-1 pull-left">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-4 mb-0 text-right">
+                  <h5>Nº Factura</h5>
+                </div>
+                <div class="col-md-8 input-group">
+                  <input  type="text"
+                  class="form-control w-25 text-center"
+                  placeholder="Suc"
+                  name="nsuc"
+                  [(ngModel)]="factura.nsuc"
+                  minlength="3"
+                  maxlength="3"
+                  >
+                  <input  type="text"
+                  class="form-control w-25 text-center"
+                  placeholder="PE"
+                  name="npe"
+                  [(ngModel)]="factura.npe"
+                  >
+
+                    <input  type="text"
+                    class="form-control w-50 text-center"
+                    #ncomp="ngModel"
+                    [ngClass]="{ 'is-invalid': ncomp.errors?.required && ( ncomp.touched || forma.submitted )}"
+                    placeholder="Factura"
+                    name="ncomp"
+
+                    [(ngModel)]="factura.ncomp"
+                    required
+                    >
+
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-8">
+                <div class="pad">
+
+                    <div class="form-row">
+
+                      <div class="col-md-4 pt-2 pull-left">
+                        <div class="col d-flex p-1 align-items-center">
+                          <div class="col mb-0 px-0">
+                            <h5>Nº Factura</h5>
+                          </div>
+                          <div class="col-md-8 px-0 input-group">
+                            <input  type="text"
+                            class="form-control w-25 text-center"
+                            placeholder="Suc"
+                            name="nsuc"
+                            [(ngModel)]="factura.nsuc"
+                            minlength="3"
+                            maxlength="3"
+                            >
+                            <input  type="text"
+                            class="form-control w-25 text-center"
+                            placeholder="PE"
+                            name="npe"
+                            [(ngModel)]="factura.npe"
+                            (blur)="siguienteNumero()"
+                            >
+                            <!-- <div class="form-control  is-invalid"> -->
+                            <!--  -->
+                              <input  type="text"
+                              class="form-control w-50 text-center"
+                              #ncomp="ngModel"
+                              [ngClass]="{ 'is-invalid': ncomp.errors?.required && ( ncomp.touched || forma.submitted )}"
+                              placeholder="Factura"
+                              name="ncomp"
+
+                              [(ngModel)]="factura.ncomp"
+                              required
+                              >
+                            <!-- </div> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-2 mb-1">
+                        <mat-form-field class="w-100">
+                          <input matInput
+                                [matDatepicker]="picker"
+                                class=""
+                                placeholder="Fecha"
+                                name="fecha"
+                                [(ngModel)]="factura.fecha"
+                                >
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col-md-2 mb-1">
+                        <mat-form-field class="w-100">
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Timbrado"
+                              name="timbrado"
+                              [(ngModel)]="factura.timbrado"
+                            >
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col-md-2 mb-1">
+                        <mat-form-field class="w-100">
+                          <mat-select
+                            placeholder="Condición"
+                            name="condicion"
+                            [(ngModel)]="factura.condicion"
+                            >
+                            <mat-option *ngFor="let condicion of condiciones" [value]="condicion.value">
+                              {{ condicion.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col-md-1 mb-1" *ngIf="factura.condicion=='plazo'">
+                        <!-- <label class="mb-0">Cuotas</label> -->
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="number"
+                              matInput
+                              class=""
+                              placeholder="Cuotas"
+                              name="cuotas"
+                              [(ngModel)]="factura.cuotas"
+                            >
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col-md-1 mb-1">
+                        <mat-form-field class="w-100">
+                          <mat-select
+                            placeholder="Moneda"
+                            name="moneda"
+                            [(ngModel)]="factura.moneda"
+                            >
+                            <mat-option *ngFor="let moneda of monedas" [value]="moneda.value">
+                              {{ moneda.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col-md-2 mb-1">
+                        <div class="form-row">
+                          <div class="col-md-8 pr-2">
+                            <mat-form-field class="w-100">
+                              <input  type="text"
+                                matInput
+                                class=""
+                                #ruc="ngModel"
+                                placeholder="RUC"
+                                name="ruc"
+                                [(ngModel)]="factura.ruc"
+                                required
+                                (blur)="getDV()"
+                              >
+                              <mat-error *ngIf="ruc.hasError('required')">
+                                  RUC es <strong>requerido</strong>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-md-4 pr-1">
+                            <mat-form-field class="w-100">
+                              <input  type="text"
+                                matInput
+                                class=""
+                                placeholder="DV"
+                                name="dv"
+                                [(ngModel)]="factura.dv"
+                              >
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-5 mb-1">
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Cliente"
+                              name="cliente"
+                              #cliente="ngModel"
+                              [(ngModel)]="factura.cliente"
+                              required
+                            >
+                            <mat-error *ngIf="cliente.hasError('required')">
+                                El cliente no puede quedar vacío!
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-5 mb-1">
+                        <mat-form-field class="w-100">
+                            <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
+                            <input  type="text"
+                              matInput
+                              class=""
+                              placeholder="Dirección"
+                              name="direccion"
+                              [(ngModel)]="factura.direccion"
+                            >
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+
+                    <!-- Detalle -->
+                    <div class="card">
+
+                      <div class="card-body">
+                        <h5>Detalle de la Factura</h5>
+                        <div class="form-row">
+                          <div class="col-md-5 mb-2 px-1">
+                            <label class="mb-0">Concepto</label>
+                            <input
+                            class="form-control form-control-sm"
+                            name="concepto"
+                            id="concepto"
+                            #concepto
+                            [(ngModel)]="detalle.concepto"
+                            >
+                          </div>
+                          <div class="col mb-2 px-1">
+                            <label class="mb-0">Recibo</label>
+                            <input
+                            class="form-control form-control-sm numerico text-right"
+                            name="recibo"
+                            #recibo
+                            [(ngModel)]="detalle.recibo"
+                            >
+                          </div>
+                          <div class="col mb-2 px-1">
+                            <label class="mb-0">Exentas</label>
+                            <input
+                            class="form-control form-control-sm numerico text-right"
+                            name="exentas"
+                            #exentas
+                            [(ngModel)]="detalle.exentas"
+                            >
+                          </div>
+                          <div class="col mb-2 px-1">
+                            <label class="mb-0">Gravadas 5%</label>
+                            <input
+                            class="form-control form-control-sm numerico text-right"
+                            name="gravadas5"
+                            #gravadas5
+                            [(ngModel)]="detalle.gravadas5"
+                            >
+                          </div>
+                          <div class="col mb-2 px-1">
+                            <label class="mb-0">Gravadas 10%</label>
+                            <input
+                            class="form-control form-control-sm numerico text-right"
+                            name="gravadas10"
+                            #gravadas10
+                            [(ngModel)]="detalle.gravadas10"
+                            >
+                          </div>
+                          <div class="col-md-1 mb-2 px-1 d-flex align-items-end">
+                            <button type="button"
+                                    name="button"
+                                    class="btn btn-success btn-sm"
+                                    (click)="agregarLinea(concepto.value, recibo.value, exentas.value, gravadas5.value, gravadas10.value)"
+                                    >
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                          </div>
+
+
+
+                        </div>
+
+                        <!-- Tabla Detalle -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <table class="table table-bordered table-sm">
+                              <thead>
+                                <tr>
+                                  <th class="text-center" style="width:55%">Cuenta</th>
+                                  <th class="text-center" style="width:10%">Recibo</th>
+                                  <th class="text-center" style="width:10%">Exentas</th>
+                                  <th class="text-center" style="width:10%">5%</th>
+                                  <th class="text-center" style="width:10%">10%</th>
+                                  <th class="text-center" style="width:5%"><i class="fa fa-trash" aria-hidden="true"></i></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let linea of detalleFactura; let indice = index">
+                                  <td class="text-right" style="display:none;">{{ indice }}</td>
+                                  <td>{{linea.concepto}}</td>
+                                  <td class="text-right">{{linea.recibo | number}}</td>
+                                  <td class="text-right">{{linea.exentas | number}}</td>
+                                  <td class="text-right">{{linea.gravadas5 | number}}</td>
+                                  <td class="text-right">{{linea.gravadas10 | number}}</td>
+                                  <td class="text-center eliminar" (click)="borrarLinea(indice)">
+                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                  </td>
+                                </tr>
+                                <tr class="subtotal">
+                                  <td>Subtotales</td>
+                                  <td class="text-right">{{subtotales.strecibo | number}}</td>
+                                  <td class="text-right">{{subtotales.stexentas | number}}</td>
+                                  <td class="text-right">{{subtotales.stgrav5 | number}}</td>
+                                  <td class="text-right">{{subtotales.stgrav10 | number}}</td>
+                                  <td class="text-center"></td>
+                                </tr>
+                                <tr class="subtotal">
+                                  <td colspan="2">Total Factura</td>
+                                  <td colspan="3" class="text-right">{{subtotales.stexentas + subtotales.stgrav5 + subtotales.stgrav10 | number}}</td>
+                                  <td class="text-center"></td>
+                                </tr>
+                                <tr class="total">
+                                  <td colspan="2">Total a Cobrar</td>
+                                  <td colspan="3" class="text-right">{{subtotales.stexentas + subtotales.stgrav5 + subtotales.stgrav10 + subtotales.strecibo | number}}</td>
+                                  <td class="text-center"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- /.row -->
+            <hr>
+
+            <!-- Botones -->
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                type="button"
+                [routerLink]="['/factura/lista']"
+                class="btn btn-success">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  Volver
+                </button>
+ <!-- [disabled]="!forma.valid" -->
+                <button
+                  type="submit"
+                  [disabled]="!forma.valid"
+                  class="btn btn-primary pull-right">
+                  <i class="fa fa-save" aria-hidden="true"></i>
+                  Guardar
+                </button>
+              </div>
+            </div>
+            <!-- / botones -->
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+
+
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4">
+
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  </section>
+</form>
+<!-- /Formulario -->
+</div>

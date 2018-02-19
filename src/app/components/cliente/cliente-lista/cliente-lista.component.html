@@ -86,7 +86,7 @@
                   <tr *ngFor="let cliente of clientesf">
                     <td><a [routerLink]="['../detalle',cliente.id]">{{cliente.ruc}} - {{cliente.dv}}</a></td>
                     <td>{{cliente.nombres}} {{cliente.ape1}} {{cliente.ape2}} </td>
-                    <td>{{cliente.estado}}</td>
+                    <td>{{cliente.estado | estadoCliente }}</td>
                     <td class="text-center">
                       <a [routerLink]="['../editar',cliente.id]"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     </td>

@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
 import {PeticionesService} from '../../../services/peticiones.service';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cliente-editar',
@@ -27,13 +28,15 @@ export class ClienteEditarComponent implements OnInit {
           private _router:Router,
           private _userService:UserService,
           private _clienteService:ClienteService,
-          private _ps:PeticionesService
+          private _ps:PeticionesService,
+          private titleService: Title
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
   }
 
   ngOnInit() {
+
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
@@ -46,6 +49,7 @@ export class ClienteEditarComponent implements OnInit {
           res=>{
             console.log(res);
             this.cliente = res.cliente[0];
+            this.setTitle(this.cliente.nombres+' '+this.cliente.ape1+' '+this.cliente.ape2);
             console.log(this.cliente);
 
           }
@@ -54,6 +58,10 @@ export class ClienteEditarComponent implements OnInit {
       })
 
     }
+  }
+
+  public setTitle( newTitle: string) {
+    this.titleService.setTitle( newTitle );
   }
 
   actualizarCliente(){

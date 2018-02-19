@@ -8,7 +8,7 @@ import { jqxNavigationBarComponent } from '../../../../../node_modules/jqwidgets
   styles: []
 })
 export class MenuPrincipalComponent implements DoCheck {
-  public isHome=false;
+  public isHome=true;
   public url_actual:string;
   width: number = 100;
   height: number = 460;

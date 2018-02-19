@@ -3,7 +3,7 @@
   <h1 class="inline">
     Seleccionar Cliente
   </h1>
-  <button type="button" class="btn btn-outline-success pull-right btn-sm">Nuevo Cliente</button>
+  <!-- <button type="button" class="btn btn-outline-success pull-right btn-sm">Nuevo Cliente</button> -->
 </section>
 
 <section class="content animated fadeIn">
@@ -19,11 +19,23 @@
               <div class="form-row">
                 <div class="col-md-2 mb-3">
                   <label>RUC</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="RUC" >
+                  <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="RUC"
+                        name="rucf"
+                        [(ngModel)]="filtros.ruc"
+                        (keyup)="filtrarClientes()"
+                        >
                 </div>
                 <div class="col-md-5 mb-3">
                   <label>Nombre</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Nombre del Cliente">
+                  <input  type="text"
+                          class="form-control form-control-sm"
+                          placeholder="Nombre del Cliente"
+                          name="nombref"
+                          [(ngModel)]="filtros.nombre"
+                          (keyup)="filtrarClientes()">
                 </div>
                 <div class="col-md-1 mb-3">
                   <label>Cliente?</label>
@@ -34,19 +46,25 @@
                 </div>
                 <div class="col-md-1 mb-3">
                   <label>Vto</label>
-                  <input type="text" class="form-control form-control-sm">
+                  <input  type="text"
+                          class="form-control form-control-sm"
+                          name="vencimientof"
+                          [(ngModel)]="filtros.vencimiento"
+                          (keyup)="filtrarClientes()">
                 </div>
                 <div class="col-md-2 mb-3">
                   <label>Frecuencia</label>
                   <select class="form-control form-control-sm">
                     <option value="0">Mensual</option>
                     <option value="1">Semestral</option>
-                    <option value="1">Anual</option>
+                    <option value="2">Anual</option>
                   </select>
                 </div>
                 <div class="col-md-1 mb-3 media">
                   <label></label>
-                  <button class="btn btn-outline-success btn-sm d-flex align-self-end mr-3" type="submit"><i class="ion-ios-search-strong"></i></button>
+                  <button class="btn btn-outline-success btn-sm d-flex align-self-end mr-3"
+                          (click)="filtrarClientes()"
+                          type="submit"><i class="ion-ios-search-strong"></i></button>
                 </div>
               </div>
 
@@ -54,30 +72,32 @@
           </div>
 
           <!-- /.box-header -->
-          <div class="box-body">
+          <div class="box-body" *ngIf="clientes">
             <table id="example1" class="table table-bordered table-striped table-sm" *ngIf="clientes.length > 0">
               <thead>
               <tr>
-                <th class="text-center">Ord</th>
-                <th class="text-center">Vto</th>
-                <th class="text-center">RUC</th>
-                <th class="text-center">Cliente</th>
-                <th class="text-center"><i class="fa fa-check-square-o" aria-hidden="true"></i></th>
+                <th class="text-center" style="width:5%">Ord</th>
+                <th class="text-center" style="width:5%">Vto</th>
+                <th class="text-center" style="width:15%">RUC</th>
+                <th class="text-center" style="width:70%">Cliente</th>
+                <th class="text-center" style="width:5%"><i class="fa fa-check-square-o" aria-hidden="true"></i></th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let cliente of clientes; index as idx">
-                <td>{{idx}}</td>
-                <td>13</td>
-                <td>4027083-1</td>
-                <td>Diego José Báez Cristaldo</td>
+              <tr *ngFor="let cliente of clientesf; index as idx">
+                <td class="text-center">{{idx}}</td>
+                <td class="text-center">{{cliente.vencimiento}}</td>
+                <td><a [routerLink]="['../clientesel',cliente.id]" target="_blank">
+                  {{cliente.ruc}} - {{cliente.dv}}
+                </a></td>
+                <td>{{cliente.nombres}}</td>
                 <td class="text-center"><input type="checkbox" value=""></td>
               </tr>
 
 
               </tbody>
               <tfoot>
-                <td colspan="5"><span>5 clientes encontrados</span></td>
+                <td colspan="5"><span>{{clientesf.length}} clientes encontrados de {{clientes.length}} en total</span></td>
               </tfoot>
             </table>
 

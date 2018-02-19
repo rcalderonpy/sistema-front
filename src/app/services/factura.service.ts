@@ -8,6 +8,7 @@ import {UserService} from './user.service';
 @Injectable()
 export class FacturaService {
   public url:string;
+  public pdf:string;
 
   constructor(
         private _http:Http,
@@ -33,54 +34,74 @@ export class FacturaService {
               .map(res => res.json());
   }
 
-  editarCliente(data_nueva){
-    let json = JSON.stringify(data_nueva);
+  getUltimoNumero(nsuc:any, npe:any){
+      let json = JSON.stringify({'nsuc':nsuc, 'npe':npe});
+      let params = "json="+json+"&authorization="+this._userService.getToken();
+      let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+      return this._http.post(this.url+'/factura/ultimo-numero',params, {headers:headers})
+                .map(res => res.json());
+  }
+
+  getFactura(id_factura){
+    let json = JSON.stringify({'id_factura':id_factura});
     let params = "json="+json+"&authorization="+this._userService.getToken();
     let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 
-    return this._http.post(this.url+'/factura/edit',params, {headers:headers})
+    return this._http.post(this.url+'/factura/show',params, {headers:headers})
               .map(res => res.json());
   }
 
-  getCliente(id_cliente){
-    let json = JSON.stringify({'id_cliente':id_cliente});
+  imprimirFactura(id_factura){
+    let json = JSON.stringify({'id_factura':id_factura});
     let params = "json="+json+"&authorization="+this._userService.getToken();
     let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 
-    return this._http.post(this.url+'/factura/detail',params, {headers:headers})
-              .map(res => res.json());
+    return this._http.post(this.url+'/factura/print',params, {headers:headers})
+              .map(res => res);
   }
 
-  eliminarCliente(id_cliente){
-    let json = JSON.stringify({'id_cliente':id_cliente});
-    let params = "json="+json+"&authorization="+this._userService.getToken();
-    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+  // editarCliente(data_nueva){
+  //   let json = JSON.stringify(data_nueva);
+  //   let params = "json="+json+"&authorization="+this._userService.getToken();
+  //   let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+  //
+  //   return this._http.post(this.url+'/factura/edit',params, {headers:headers})
+  //             .map(res => res.json());
+  // }
+  //
 
-    return this._http.post(this.url+'/factura/delete',params, {headers:headers})
-              .map(res => res.json());
-  }
-
-  filtrarClientes(completo:any, filtro:any){
-    let filtro_clientes:any[]=[];
-    let filtroLow = filtro;
-    if(filtro.ruc!=''){
-      filtroLow.ruc = filtro.ruc.toLowerCase();
-    }
-    if(filtro.nombre!=''){
-      filtroLow.nombre = filtro.nombre.toLowerCase();
-    }
-
-    for (let cliente of completo ){
-        console.log(cliente);
-        let ruc = cliente.ruc.toLowerCase();
-        let nombre = (cliente.nombres+' '+cliente.ape1+' '+cliente.ape2).toLowerCase();
-
-        if(ruc.indexOf(filtroLow.ruc) >= 0 && nombre.indexOf(filtroLow.nombre) >= 0){
-          filtro_clientes.push(cliente);
-        }
-    }
-
-    return filtro_clientes;
-  }
+  //
+  // eliminarCliente(id_cliente){
+  //   let json = JSON.stringify({'id_cliente':id_cliente});
+  //   let params = "json="+json+"&authorization="+this._userService.getToken();
+  //   let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+  //
+  //   return this._http.post(this.url+'/factura/delete',params, {headers:headers})
+  //             .map(res => res.json());
+  // }
+  //
+  // filtrarClientes(completo:any, filtro:any){
+  //   let filtro_clientes:any[]=[];
+  //   let filtroLow = filtro;
+  //   if(filtro.ruc!=''){
+  //     filtroLow.ruc = filtro.ruc.toLowerCase();
+  //   }
+  //   if(filtro.nombre!=''){
+  //     filtroLow.nombre = filtro.nombre.toLowerCase();
+  //   }
+  //
+  //   for (let cliente of completo ){
+  //       console.log(cliente);
+  //       let ruc = cliente.ruc.toLowerCase();
+  //       let nombre = (cliente.nombres+' '+cliente.ape1+' '+cliente.ape2).toLowerCase();
+  //
+  //       if(ruc.indexOf(filtroLow.ruc) >= 0 && nombre.indexOf(filtroLow.nombre) >= 0){
+  //         filtro_clientes.push(cliente);
+  //       }
+  //   }
+  //
+  //   return filtro_clientes;
+  // }
 
 }

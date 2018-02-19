@@ -1,3 +1,197 @@
-<p>
-  factura-detalle works!
-</p>
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>Factura Nº {{factura.nsuc}} - {{factura.npe}} - {{factura.ncomp}}</h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content animated fadeIn">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="box box-success">
+
+          <div class="box-body">
+
+            <div class="form-row m-2" *ngIf="factura.fecha">
+
+              <div class="col-md-2">
+                <div class="">
+                  <span><strong>Fecha</strong></span>
+                </div>
+                {{factura.fecha.timestamp | tsToDate | date:'dd/MM/y'}}
+              </div>
+
+              <div class="col-md-2">
+                <div class="">
+                  <span><strong>Timbrado</strong></span>
+                </div>
+                {{factura.timbrado}}
+              </div>
+
+              <div class="col-md-2">
+                <div class="">
+                  <span><strong>Condición</strong></span>
+                </div>
+                {{factura.condicion | uppercase }}
+              </div>
+
+              <div class="col-md-2" *ngIf="factura.condicion=='plazo'">
+                <div class="">
+                  <span><strong>Cuotas</strong></span>
+                </div>
+                {{factura.cuotas}}
+              </div>
+
+              <div class="col-md-2">
+                <div class="">
+                  <span><strong>Moneda</strong></span>
+                </div>
+                {{factura.moneda}}
+              </div>
+
+            </div>
+
+            <div class="form-row m-2" *ngIf="factura.fecha">
+
+              <div class="col-md-2">
+                <div class="">
+                  <span><strong>RUC</strong></span>
+                </div>
+                {{factura.ruc}} - {{factura.dv}}
+              </div>
+
+              <div class="col-md-4">
+                <div class="">
+                  <span><strong>Cliente</strong></span>
+                </div>
+                  {{factura.cliente | uppercase }}
+              </div>
+
+              <div class="col">
+                <div class="">
+                  <span><strong>Dirección</strong></span>
+                </div>
+                  {{factura.direccion | uppercase }}
+              </div>
+
+            </div>
+
+            <!-- Detalle -->
+            <div class="card">
+
+              <div class="card-body">
+                <h5>Detalle de la Factura</h5>
+
+                <!-- Alerta sin detalle  -->
+                <div class="alert alert-secondary" *ngIf="detalleFactura.length == 0">
+                  <h4 class="alert-heading">Sin detalle!</h4>
+                  <p>No existen detalles para esta Factura</p>
+                </div>
+
+                <!-- Tabla Detalle -->
+                <div class="row" *ngIf="detalleFactura.length > 0">
+                  <div class="col-md-12" id="cont">
+                    <table class="table table-bordered table-sm">
+                      <thead>
+                        <tr>
+                          <th class="text-center" style="width:60%">Cuenta</th>
+                          <th class="text-center" style="width:10%">Recibo</th>
+                          <th class="text-center" style="width:10%">Exentas</th>
+                          <th class="text-center" style="width:10%">5%</th>
+                          <th class="text-center" style="width:10%">10%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let linea of detalleFactura; let indice = index">
+                          <td class="text-right" style="display:none;">{{ indice }}</td>
+                          <td>{{linea.concepto}}</td>
+                          <td class="text-right">{{linea.recibo | number}}</td>
+                          <td class="text-right">{{linea.exentas | number}}</td>
+                          <td class="text-right">{{linea.gravadas5 | number}}</td>
+                          <td class="text-right">{{linea.gravadas10 | number}}</td>
+                        </tr>
+                        <tr class="subtotal">
+                          <td>Subtotales</td>
+                          <td class="text-right">{{subtotales.strecibo | number}}</td>
+                          <td class="text-right">{{subtotales.stexentas | number}}</td>
+                          <td class="text-right">{{subtotales.stgrav5 | number}}</td>
+                          <td class="text-right">{{subtotales.stgrav10 | number}}</td>
+
+                        </tr>
+                        <tr class="subtotal">
+                          <td colspan="2">Total Factura</td>
+                          <td colspan="3" class="text-right">{{subtotales.stexentas + subtotales.stgrav5 + subtotales.stgrav10 | number}}</td>
+                        </tr>
+                        <tr class="total">
+                          <td colspan="2">Total a Cobrar</td>
+                          <td colspan="3" class="text-right">{{subtotales.stexentas + subtotales.stgrav5 + subtotales.stgrav10 + subtotales.strecibo | number}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- Botones -->
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                type="button"
+                [routerLink]="['/factura/lista']"
+                class="btn btn-success">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  Volver
+                </button>
+                <button
+                type="button"
+                class="btn btn-default"
+                (click)="imprimirPdf()">
+                  <i class="fa fa-print" aria-hidden="true"></i>
+                  Imprimir
+                </button>
+
+                <!-- <button
+                  type="submit"
+                  [disabled]="!forma.valid"
+                  class="btn btn-primary pull-right">
+                  <i class="fa fa-save" aria-hidden="true"></i>
+                  Guardar
+                </button> -->
+              </div>
+            </div>
+            <!-- / botones -->
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+
+
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-4">
+
+
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [stick-to-page]="false"
+              [external-link-target]="'blank'"
+              style="display: block;"
+              *ngIf="pdfSrc"
+  ></pdf-viewer>
+  </section>
+</div>

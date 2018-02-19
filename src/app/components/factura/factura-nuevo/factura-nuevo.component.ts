@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute } from '@angular/router';
 import {FacturaService} from '../../../services/factura.service';
 import {PeticionesService} from '../../../services/peticiones.service';
+import {ClienteService} from '../../../services/cliente.service';
 import {CalculosService} from '../../../services/calculos.service';
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -39,7 +40,8 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
     descuento:0,
     total_factura:0,
     iva10:0,
-    iva5:0
+    iva5:0,
+    detalle:[]
   };
   public condiciones = [
     {value: 'contado', viewValue: 'Contado'},
@@ -73,7 +75,8 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
           private _userService:UserService,
           private _facturaService:FacturaService,
           private _calculoService:CalculosService,
-          private _ps:PeticionesService
+          private _ps:PeticionesService,
+          private _cs:ClienteService
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
@@ -89,7 +92,7 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
     if(this.identity == null || !this.identity.sub){
       this._router.navigate(['/login']);
     } else {
-
+      this.siguienteNumero(); // coloca por defecto la siguiente factura punto exp 001
     }
   }
 
@@ -108,7 +111,10 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
       parseFloat(this.subtotales.stgrav10);
     this.factura.iva5 = this._calculoService.sacarIva5(this.subtotales.stgrav5);
     this.factura.iva10 = this._calculoService.sacarIva10(this.subtotales.stgrav10);
-    // console.log(this.factura);
+    for(let detalle in this.detalleFactura){
+      this.factura.detalle.push(this.detalleFactura[detalle]);
+    }
+    console.log(this.factura);
 
     // utiliza el servicio de guardar factura
     this._facturaService.nuevaFactura(this.factura).subscribe(
@@ -128,6 +134,20 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
     if(dv){
       this.factura.dv=dv;
     }
+    this._cs.getClienteRuc(this.factura.ruc).subscribe(
+      res=>{
+        if(res.code == 200){
+          this.factura.cliente = res.cliente[0].nombres + ' ' + res.cliente[0].ape1 + ' ' + res.cliente[0].ape2;
+        } else {
+          this.factura.cliente = '';
+        }
+        console.log(res);
+      },
+      error=>{
+        this.factura.cliente = '';
+        console.log('se produce el error');
+      }
+    )
   }
 
   guardar(forma:any){
@@ -182,6 +202,26 @@ export class FacturaNuevoComponent implements OnInit, DoCheck {
     this.detalleFactura.splice(id,1);
     this.sumarDetalle();
     alert('Elemento eliminado');
+  }
+
+  siguienteNumero(){
+    this._facturaService.getUltimoNumero(this.factura.nsuc, this.factura.npe).subscribe(
+      res=>{
+        // console.log(res);
+        // console.log(res.ultimo_numero);
+
+        let ultimo = res.ultimo_numero;
+        let ultimo_int = parseInt(ultimo);
+        let nuevo_int = ultimo_int+1;
+        console.log(nuevo_int);
+        let nuevo_str = ('0000000'+nuevo_int.toString()).substr(-7);
+        // console.log(nuevo_str);
+        this.factura.ncomp = nuevo_str;
+
+
+      }
+    );
+
   }
 
 

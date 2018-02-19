@@ -24,13 +24,13 @@ export class AppComponent{
             ) {
     this.identity=this._userService.getIdentity();
     this.token=this._userService.getToken();
-    this.menu='principal';
+    //this.menu='principal';
 
   }
 
 
   onActivate(event){
-    console.log('se ejecuta ver datos service');
+    console.log(event);
     window.setTimeout(()=>{
       console.log(event.menu);
       this.menu=event.menu;

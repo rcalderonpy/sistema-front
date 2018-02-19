@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -12,9 +12,11 @@ import {FacturaService} from './services/factura.service';
 import {ClienteService} from './services/cliente.service';
 import {CalculosService} from './services/calculos.service';
 import {GLOBAL} from './services/global';
+import {ParametrosService} from './services/parametros.service';
 
 // pipes
 import {TsToDatePipe} from './pipes/tstodate.pipe';
+import {estadoClientePipe} from './pipes/estadocliente.pipe';
 
 //Rutas
 import {APP_ROUTING} from './app-router';
@@ -51,6 +53,11 @@ import {  ClienteListaComponent,
           ClienteDetalleComponent
         } from './components/cliente/cliente.index';
 
+// Cliente Seleccionado
+import { ClienteselComponent } from './components/clientesel/clientesel.component';
+import {  FichaClienteComponent
+        } from './components/clientesel/clientesel.index';
+
 // Facturas
 import { FacturaComponent } from './components/factura/factura.component';
 import {  FacturaListaComponent,
@@ -73,6 +80,9 @@ import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_j
 import { jqxNumberInputComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxnumberinput';
 // import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskModule } from "ngx-currency-mask";
+import { FacturaReportesComponent } from './components/factura/factura-reportes/factura-reportes.component';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
+
 
 
 @NgModule({
@@ -92,18 +102,24 @@ import { CurrencyMaskModule } from "ngx-currency-mask";
     UsuarioEditarComponent,
     UsuarioListaComponent,
     TsToDatePipe,
+    estadoClientePipe,
     ClienteComponent,
     ClienteListaComponent,
     ClienteNuevoComponent,
     ClienteEditarComponent,
     ClienteDetalleComponent,
+    ClienteselComponent,
+    FichaClienteComponent,
     FacturaComponent,
     FacturaListaComponent,
     FacturaNuevoComponent,
     FacturaEditarComponent,
     FacturaDetalleComponent,
     jqxBarGaugeComponent,
-    jqxNumberInputComponent
+    jqxNumberInputComponent,
+    FacturaReportesComponent,
+    PdfViewerComponent,
+    FichaClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -124,10 +140,12 @@ import { CurrencyMaskModule } from "ngx-currency-mask";
   ],
   providers: [
     PeticionesService,
+    Title,
     UserService,
     ClienteService,
     FacturaService,
     CalculosService,
+    ParametrosService,
     {provide: LOCALE_ID, useValue: "es"}
   ],
   bootstrap: [AppComponent]

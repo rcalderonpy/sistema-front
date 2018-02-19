@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
+import {ParametrosService} from '../../../services/parametros.service';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -27,10 +28,14 @@ export class ClienteListaComponent implements OnInit {
           private _route:ActivatedRoute,
           private _router:Router,
           private _userService:UserService,
+          private _ps:ParametrosService,
           private _clienteService:ClienteService
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+    _ps.getEstadosCliente().subscribe(res=>{
+      console.log(res);
+    });
   }
 
   ngOnInit() {

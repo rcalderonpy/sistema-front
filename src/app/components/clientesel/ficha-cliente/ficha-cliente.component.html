@@ -1,0 +1,102 @@
+
+<div class="animated fadeIn">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      {{cliente.nombres}} {{cliente.ape1}} {{cliente.ape2}}
+    </h1>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col-md-12">
+        <!-- Formulario Carga Datos -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Datos Generales</h3>
+
+
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body" *ngIf="cliente.nombres!=''">
+
+            <div class="form-row">
+
+              <div class="col-md-2 mb-3">
+                <div class="form-row">
+                  <div class="col-md-8 pr-1">
+                    <label>RUC</label>
+                    <input
+                          type="text"
+                          class="form-control form-control-sm text-center"
+                          name="ruc"
+                          readonly = true
+                          [ngModel]="cliente.ruc"
+                          >
+                  </div>
+                  <div class="col-md-4 pl-1" >
+                        <label>DV</label>
+                        <input  type="text"
+                        class="form-control form-control-sm text-center"
+                        name="dv"
+                        readonly = true
+                        [ngModel]="cliente.dv"
+                        >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 mb-3">
+                  <label>ESTADO</label>
+                  <input  type="text"
+                  class="form-control form-control-sm text-uppercase text-center"
+                  name="estado"
+                  readonly = true
+                  [ngModel]="estado_texto"
+                  >
+              </div>
+
+              <div class="mb-3 px-1" style="width:5%">
+                  <label>VTO</label>
+                  <input  type="text"
+                  class="form-control form-control-sm"
+                  name="vencimiento"
+                  readonly = true
+                  [ngModel]="cliente.vencimiento"
+                  >
+              </div>
+
+              <div class="mb-3 px-1" style="width:10%">
+                  <label>HONORARIO</label>
+                  <input  type="text"
+                  class="form-control form-control-sm text-right"
+                  name="honorario"
+                  readonly = true
+                  value={{cliente.honorario|number}}
+                  >
+              </div>
+
+
+
+            </div>
+            <!-- /row -->
+
+
+          </div>
+        <!-- /.box-body -->
+        </div>
+      <!-- /.box -->
+
+    </div>
+    <!-- /.col -->
+
+  </div>
+  <!-- /.row -->
+  </section>
+</div>

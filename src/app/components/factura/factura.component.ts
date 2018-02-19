@@ -14,7 +14,7 @@ export class FacturaComponent implements OnInit {
   constructor(private _us:UserService) { }
 
   ngOnInit() {
-    this.menu='cliente';
+    this.menu='principal';
     this.emitirEvento();
     this.menu_output='cliente';
   }

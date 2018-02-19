@@ -5,12 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cliente.component.html',
   styles: []
 })
-export class ClienteComponent implements OnInit {
+export class ClienteselComponent implements OnInit {
   public menu:string;
   constructor() { }
 
   ngOnInit() {
-    this.menu='principal';
+    this.menu='cliente';
   }
 
 }

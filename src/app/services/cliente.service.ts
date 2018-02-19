@@ -52,6 +52,15 @@ export class ClienteService {
               .map(res => res.json());
   }
 
+  getClienteRuc(ruc_cliente){
+    let json = JSON.stringify({'ruc_cliente':ruc_cliente});
+    let params = "json="+json+"&authorization="+this._userService.getToken();
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+    return this._http.post(this.url+'/contabilidad/cliente/detail-ruc',params, {headers:headers})
+              .map(res => res.json());
+  }
+
   eliminarCliente(id_cliente){
     let json = JSON.stringify({'id_cliente':id_cliente});
     let params = "json="+json+"&authorization="+this._userService.getToken();
@@ -70,17 +79,38 @@ export class ClienteService {
     if(filtro.nombre!=''){
       filtroLow.nombre = filtro.nombre.toLowerCase();
     }
+    if(filtro.vencimiento!=''){
+      filtroLow.vencimiento = filtro.vencimiento;
+    }
+
+    console.log(filtroLow);
 
     for (let cliente of completo ){
         console.log(cliente);
         let ruc = cliente.ruc.toLowerCase();
         let nombre = (cliente.nombres+' '+cliente.ape1+' '+cliente.ape2).toLowerCase();
+        let vencim = cliente.vencimiento.toString();
+        console.log(vencim);
 
-        if(ruc.indexOf(filtroLow.ruc) >= 0 && nombre.indexOf(filtroLow.nombre) >= 0){
-          filtro_clientes.push(cliente);
+        if(filtroLow.vencimiento!=""){
+          console.log('vencimiento tiene valor')
+          if( ruc.indexOf(filtroLow.ruc) >= 0 &&
+              nombre.indexOf(filtroLow.nombre) >= 0 &&
+              vencim == filtroLow.vencimiento.toString()
+             ){
+                  filtro_clientes.push(cliente);
+          }
+        } else {
+          console.log('vencimiento esta en blanco')
+          if( ruc.indexOf(filtroLow.ruc) >= 0 &&
+              nombre.indexOf(filtroLow.nombre) >= 0
+             ){
+                  filtro_clientes.push(cliente);
+          }
         }
+
     }
-    
+
     return filtro_clientes;
   }
 

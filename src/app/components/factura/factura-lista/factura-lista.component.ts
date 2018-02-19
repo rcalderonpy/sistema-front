@@ -82,25 +82,25 @@ export class FacturaListaComponent implements OnInit {
     )
   }
 
-  eliminarCliente(id){
-    this._facturaService.eliminarCliente(id).subscribe(
-      res => {
-        console.log(res);
-        this.eliminado=true;
-        this.loading=true;
-        this.conseguirFacturas();
-        window.setTimeout(()=>{
-          this.eliminado=false;
-        },3000)
+  // eliminarCliente(id){
+  //   this._facturaService.eliminarCliente(id).subscribe(
+  //     res => {
+  //       console.log(res);
+  //       this.eliminado=true;
+  //       this.loading=true;
+  //       this.conseguirFacturas();
+  //       window.setTimeout(()=>{
+  //         this.eliminado=false;
+  //       },3000)
+  //
+  //     }
+  //   );
+  // }
 
-      }
-    );
-  }
-
-  filtrarClientes(){
-    console.log(this.filtros);
-    this.facturasf=this._facturaService.filtrarClientes(this.facturas, this.filtros);
-    console.log(this.facturasf);
-  }
+  // filtrarClientes(){
+  //   console.log(this.filtros);
+  //   this.facturasf=this._facturaService.filtrarClientes(this.facturas, this.filtros);
+  //   console.log(this.facturasf);
+  // }
 
   }

@@ -84,6 +84,7 @@
                             placeholder="PE"
                             name="npe"
                             [(ngModel)]="factura.npe"
+                            (blur)="siguienteNumero()"
                             >
                             <!-- <div class="form-control  is-invalid"> -->
                             <!--  -->
@@ -109,7 +110,7 @@
                                 class=""
                                 placeholder="Fecha"
                                 name="fecha"
-                                [(ngModel)]="factura.fecha"                              
+                                [(ngModel)]="factura.fecha"
                                 >
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
@@ -128,15 +129,9 @@
                             >
                         </mat-form-field>
 
-                        <!-- <jqxBarGauge
-                        	 [width]="600" [height]="600" [colorScheme]="'scheme02'"
-                        	 [max]="150" [values]="values">
-                        </jqxBarGauge> -->
-
                       </div>
 
                       <div class="col-md-2 mb-1">
-                        <!-- <label class="mb-0">Condición</label> -->
                         <mat-form-field class="w-100">
                           <mat-select
                             placeholder="Condición"
@@ -194,6 +189,7 @@
                                 name="ruc"
                                 [(ngModel)]="factura.ruc"
                                 required
+                                (blur)="getDV()"
                               >
                               <mat-error *ngIf="ruc.hasError('required')">
                                   RUC es <strong>requerido</strong>
@@ -213,8 +209,6 @@
                             </mat-form-field>
                           </div>
                         </div>
-
-
 
                       </div>
 
@@ -253,8 +247,7 @@
 
                     <!-- Detalle -->
                     <div class="card">
-                      <!-- <div class="card-header">
-                      </div> -->
+
                       <div class="card-body">
                         <h5>Detalle de la Factura</h5>
                         <div class="form-row">
@@ -321,7 +314,7 @@
                         <!-- Tabla Detalle -->
                         <div class="row">
                           <div class="col-md-12">
-                            <table class="table table-bordered table-hover table-sm">
+                            <table class="table table-bordered table-sm">
                               <thead>
                                 <tr>
                                   <th class="text-center" style="width:55%">Cuenta</th>

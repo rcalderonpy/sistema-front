@@ -9,6 +9,8 @@ import {  UsuarioComponent } from './components/usuarios/usuario.component';
 import {  USUARIO_ROUTES } from './components/usuarios/usuario.routes';
 import {  ClienteComponent } from './components/cliente/cliente.component';
 import {  CLIENTE_ROUTES } from './components/cliente/cliente.routes';
+import {  ClienteselComponent } from './components/clientesel/clientesel.component';
+import {  CLIENTESEL_ROUTES } from './components/clientesel/clientesel.routes';
 import {  FacturaComponent } from './components/factura/factura.component';
 import {  FACTURA_ROUTES } from './components/factura/factura.routes';
 
@@ -25,6 +27,11 @@ const APP_ROUTES: Routes = [
     path: 'cliente',
     component: ClienteComponent,
     children: CLIENTE_ROUTES
+  },
+  {
+    path: 'clientesel/:id',
+    component: ClienteselComponent,
+    children: CLIENTESEL_ROUTES
   },
   {
     path: 'factura',
